@@ -57,7 +57,7 @@ namespace HW18 {
 		if (cars[i] is MiniVan) {
 		    ((MiniVan) cars[i]).Print();
 		}
-		}
+	    }
 	}
     }
     }
