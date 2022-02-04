@@ -1,0 +1,87 @@
+import { Button, TextEdit } from "sixtyfps_widgets.60";
+export BankAccountGUI := Window {
+
+    title: "Bank Account";
+    width: 640px;
+    height: 360px;
+    background: lightgray;
+
+    callback deposit(string);
+    callback withdraw();
+    callback endOfMonth();
+    callback balanceChanged(string);
+    balanceChanged(val) => {;}
+    property <string> moneyAmount: "";
+
+    deposit_button := Button {
+        width: parent.width * 0.15;
+        height: parent.height * 0.06;
+        x: root.height * 0.23;
+        y: parent.height * 0.95 -13px;
+        text: "Deposit";
+        clicked => { root.deposit(tbt.text); }
+    }
+    withdraw_button := Button {
+        width: parent.width * 0.16;
+        height: parent.height * 0.06;
+        x: root.height * 0.73;
+        y: parent.height * 0.95 -13px;
+        text: "Withdraw";
+        clicked => { root.withdraw(); }
+    }
+    end_of_month_button := Button {
+        width: parent.width * 0.26;
+        height: parent.height * 0.06;
+        x: root.height * 1.17;
+        y: parent.height * 0.95 -13px;
+        text: "trigger end of month";
+        clicked => { root.endOfMonth(); }
+    }
+    checkingaccount := Rectangle {
+        x: root.width * 0.3;
+        y: root.height * 0.045;
+        Text {
+            font-size: 15px;
+            font-weight: 1000;
+            text: "Checking Account - 00000000";
+            color: black;
+        }
+    }
+    balance_display_box := Rectangle {
+        x: root.width * 0.2;
+        y: root.height * 0.24;
+        width: root.width * 0.6;
+        height: root.height * 0.6;
+        background: #c4dee4;
+        border-width: 3px;
+        border-color: gray;
+        Text {
+            //x: parent.x + 3px;//library appears to be bugged
+            horizontal-alignment: left;
+            font-size: 30px;
+            text: "balance: $0";
+            color: #20060d;
+        }
+    }
+    TransactionBox := Rectangle {
+        x: 130px;
+        y: 50px;
+        width: 330px;
+        height: 20px;
+        tbt := Text {
+            font-size: 15px;
+            font-weight: 1000;
+            x: parent.x - 132px;
+            horizontal-alignment: center;
+            text: "Transaction amount: ";
+            color: #20060d;
+        }
+        TextEdit {
+            x: parent.x + 50px;
+            width: 200px;
+            height: 20px;
+            has-focus: true;
+            text: root.moneyAmount;
+        }
+    }
+}

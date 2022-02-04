@@ -1,0 +1,13 @@
+[package]
+edition = "2021"
+name = "hw24"
+version = "0.1.0"
+build = "build.rs"
+resolver = "2" # avoid dependency conflicts on some platforms
+
+[dependencies]
+derive_more = "*"
+sixtyfps = "0.1.6"
+
+[build-dependencies]
+sixtyfps-build = "0.1.6"
