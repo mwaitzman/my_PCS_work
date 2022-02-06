@@ -1,4 +1,4 @@
-import { Button, TextEdit } from "sixtyfps_widgets.60";
+import { Button, LineEdit } from "sixtyfps_widgets.60";
 export BankAccountGUI := Window {
 
     title: "Bank Account";
@@ -6,12 +6,12 @@ export BankAccountGUI := Window {
     height: 360px;
     background: lightgray;
 
-    callback deposit(string);
+    //TODO: stop with the strings and make a custom money struct in here
+    callback deposit();
     callback withdraw();
     callback endOfMonth();
-    callback balanceChanged(string);
-    balanceChanged(val) => {;}
-    property <string> moneyAmount: "";
+    property<string> balance: "balance: $0";
+    property <string> inputMoneyAmount;
 
     deposit_button := Button {
         width: parent.width * 0.15;
@@ -19,7 +19,7 @@ export BankAccountGUI := Window {
         x: root.height * 0.23;
         y: parent.height * 0.95 -13px;
         text: "Deposit";
-        clicked => { root.deposit(tbt.text); }
+        clicked => { root.deposit(); }
     }
     withdraw_button := Button {
         width: parent.width * 0.16;
@@ -59,7 +59,7 @@ export BankAccountGUI := Window {
             //x: parent.x + 3px;//library appears to be bugged
             horizontal-alignment: left;
             font-size: 30px;
-            text: "balance: $0";
+            text: root.balance;
             color: #20060d;
         }
     }
@@ -76,12 +76,14 @@ export BankAccountGUI := Window {
             text: "Transaction amount: ";
             color: #20060d;
         }
-        TextEdit {
+        LineEdit {
             x: parent.x + 50px;
             width: 200px;
-            height: 20px;
-            has-focus: true;
-            text: root.moneyAmount;
+            height: 30px;
+            enabled: true;
+            //has-focus: true;
+            placeholder-text: "enter the amount";
+            accepted => {root.inputMoneyAmount = self.text;}
         }
     }
 }

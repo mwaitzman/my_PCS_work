@@ -1,17 +1,35 @@
 use std::fmt;
+use std::rc::Rc;
 use derive_more::Display;
-
+use sixtyfps::SharedString;
 sixtyfps::include_modules!();
 fn main() {
+    const BAL_PREFIX: &str = "balance: $";
     let mut acc = CheckingAccount::new();
-    let window = BankAccountGUI::new();
-    window.on_deposit(move |s| {
-        acc.try_deposit(&s);
-        println!("{}", acc.balance.dollars);
+    let window = Rc::new(BankAccountGUI::new());
+
+    let win_clone = Rc::clone(&window);
+    window.on_deposit(move || {
+        let amount = win_clone.get_inputMoneyAmount();
+        dbg!({}, &amount);
+        acc.try_deposit_with_str(&amount);
+        dbg!("{}", &acc.balance);
+        win_clone.set_balance(SharedString::from(BAL_PREFIX.to_owned() + &acc.balance.as_string()));
     });
+
+    let win_clone = Rc::clone(&window);
     window.on_withdraw(move || {
-        acc.try_withdraw("");
-        println!("{}", acc.balance.dollars);
+        let amount = win_clone.get_inputMoneyAmount();
+        println!("withdrawing amount: {}", &amount);
+        acc.try_withdraw_with_str("");
+        dbg!("{}", &acc.balance);
+        win_clone.set_balance(SharedString::from(BAL_PREFIX.to_owned() + &acc.balance.as_string()));
+    });
+
+    let win_clone = Rc::clone(&window);
+    window.on_endOfMonth(move || {
+        dbg!("attempting to do end of month");
+        win_clone.set_balance(SharedString::from(BAL_PREFIX.to_owned() + &acc.balance.as_string()));
     });
     
     window.run();
@@ -37,12 +55,19 @@ impl CheckingAccount {
         self.balance += amount;
     }
     pub fn deposit_dollars(&mut self, amount: usize) {
+        //NOTE: legacy test function, I think. May be removed later
         self.balance.dollars += amount as i64;
     }
-    pub fn try_deposit(&mut self, amount: &str) {
-        self.balance.dollars += 5;
+    pub fn try_deposit_with_str(&mut self, amount: &str) {
+        //NOTE currently quietly fails if the amount can't be parsed as a balance
+        if let Ok(bal) = Balance::parse_from_str(&amount) {
+            //TODO: disallow depositing a negative amount. NOTE: maybe move the check, once implemented, to somewhere else (the `deposit` function, probably)
+            self.deposit(bal);
+        }
     }
     pub fn withdraw(&mut self, amount: Balance) -> Result<(), WouldbeNegativeBalance> {
+        //TODO: disallow withdrawing a negative amount
+
         if (self.balance - amount).is_negative() {
             // limitation of rust forbids me from merely doing `if self.balance - amount < 0`
             return Err(WouldbeNegativeBalance);
@@ -51,9 +76,16 @@ impl CheckingAccount {
         self.withdrawals_this_month += 1;
         Ok(())
     }
-    pub fn try_withdraw(&mut self, amount: &str) {
-        self.balance.cents -= 5;
+    pub fn try_withdraw_with_str(&mut self, amount: &str) {
+        //NOTE currently quietly fails if the amount can't be parsed as a balance
+        println!("in try method. balance = {}", self.balance);
+        if let Ok(bal) = Balance::parse_from_str(&amount) {
+            //NOTE: currently quietly fails if attempting to withdraw negatively.
+            _ = self.withdraw(bal);
+        }
+        println!("in try method. balance = {}", self.balance);
     }
+
     pub fn do_end_of_month(&mut self) -> String {
         if self.withdrawals_this_month > self.max_withdrawals {
             self.balance.dollars -= 25;
@@ -82,7 +114,7 @@ impl fmt::Display for WouldbeNegativeBalance {
     }
 }
 
-#[derive(Copy, Clone, Display, PartialEq, PartialOrd)]
+#[derive(Copy, Clone, Debug, Display, PartialEq, PartialOrd)]
 #[display(fmt = "{} {}", dollars, cents)]
 pub struct Balance {
     dollars: i64,
@@ -96,6 +128,40 @@ impl Balance {
     }
     pub fn is_negative(&self) -> bool {
         self.dollars < 0 || self.cents < 0
+    }
+
+    pub fn as_string(&self) -> String {//temporary — will rework eveything into using proper structs later
+        let mut output = String::new();
+        if self.is_negative() {output += "-";}
+        output += &format!("{}.{}", self.dollars, self.cents);
+        output
+    }
+
+    pub fn parse_from_str(s: &str) -> Result<Self, ()> {
+        let s= s.trim();
+        let s = s.split_once('.');
+        //ugly as hell. TODO: rework
+        if s.is_none() {return Err(());}
+        let (dollars, cents) = s.unwrap();
+        let mut d = 0;
+        let mut c = 0;
+        if dollars.len() > 0 {
+            d = match dollars.parse::<i64>() {
+                Ok(x) => x,
+                Err(_) => 0
+            };
+        }
+        if cents.len() > 0 {
+            let d = match cents.parse::<i8>() {
+                Ok(x) => x,
+                Err(_) => 0
+            };
+        }
+        if d == 0 && c == 0 {return Err(());}
+        Ok(Self {
+            dollars: d,
+            cents: c
+        })
     }
 }
 
