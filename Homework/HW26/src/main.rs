@@ -1,5 +1,7 @@
 #![feature(generic_associated_types)]
 #![feature(in_band_lifetimes)]
+
+#![allow(unused_variables)]
 #![allow(unused_imports)]
 use array2d::Array2D;
 use rand::Rng;
@@ -11,11 +13,15 @@ use std::env;
 fn main() {
     let window = Window::new_centered("Tictactoe Game", (640, 480)).unwrap();
     let mut game;
+    let a = env::args().skip(1).collect::<Vec<String>>();
+    let first;
+    let second;
     //kinda a stupid/lazy way of doing this, but I'm deciding whether to do a PvP or Player vs CPU game based on the number of args passed to the program, because it's simple, effective, and easy to implement :|
     if env::args().len() > 1 {
+        first = a[0].as_str();
+        second = a[1].as_str();
         game = TicTacToe::new_2_humans(
-            env::args().nth(1).unwrap().as_str(),
-            env::args().nth(2).unwrap().as_str(),
+            first, second
         );
     } else {
         game = TicTacToe::new_with_1_cpu();
@@ -41,7 +47,7 @@ fn main() {
 }
 
 use crate::Player::*;
-#[derive(Clone, PartialEq)]
+#[derive(Clone, Copy, PartialEq)]
 enum Player<'a> {
     Human(&'a str),
     CPU,
@@ -49,8 +55,8 @@ enum Player<'a> {
 impl Player<'_> {
     pub fn take_turn(&self, ttt: &mut TicTacToe) {
         match self {
-            CPU => self.cpu_take_turn(&mut ttt),
-            Human(_) => self.human_take_turn(&mut ttt),
+            CPU => self.cpu_take_turn(ttt),
+            Human(_) => self.human_take_turn(ttt),
         }
     }
     fn cpu_take_turn(&self, ttt: &mut TicTacToe) {
@@ -85,25 +91,20 @@ impl std::ops::Deref for BoardState<'a> {
     }
 }
 
-struct Board<'a>(Array2D<BoardState<'a>>);
+struct Board<'a> {
+board: Array2D<BoardState<'a>>
+}
 impl Board<'_> {
     pub fn new() -> Self {
-	//IDEC anymore. GTFO of my way so I can fix the lifetime errors
-        unsafe {
-            std::mem::transmute::<Array2D<BoardState<'_>>, Board<'_>>(
-                array2d::Array2D::filled_with(BoardState::Blank, 3, 3),
-            )
-        }
+	Self {board: array2d::Array2D::filled_with(BoardState::Blank, 3, 3) }
     }
 }
 impl std::ops::Index<(usize, usize)>for Board<'a> {
     type Output = BoardState<'a>;
     fn index(&self, indices: (usize, usize)) -> &Self::Output {
-    let board = unsafe {
-            std::mem::transmute::<Board<'_>, Array2D<BoardState<'_>>>(*self)
-        };
+    let board = &self.board;
         let (row, column) = indices;
-        board.get(row, column).unwrap()
+        &board.get(row, column).unwrap()
     }
 }
 struct TicTacToe<'a> {
@@ -112,10 +113,10 @@ struct TicTacToe<'a> {
     board: Board<'a>,
     game_over: bool,
 }
-impl TicTacToe<'_> {
-    pub fn new_2_humans(n1: &str, n2: &str) -> Self {
+impl TicTacToe<'a> {
+    pub fn new_2_humans(n1: &'a str, n2: &'a str) -> Self {
         Self {
-            player1: Player::Human(n1),
+            player1: Player::Human::<'a>(n1),
             player2: Player::Human(n2),
             board: Board::new(),
             game_over: false,
@@ -130,14 +131,14 @@ impl TicTacToe<'_> {
         }
     }
 
-    pub fn check_for_winner(&self) -> Option<Player> {
-        let board = self.board;
+    pub fn check_for_winner(&self) -> Option<&Player> {
+        let board = &self.board;
         for i in 0..3 {
             if board[(i,0)] != BoardState::Blank
                 && board[(i,0)] == board[(i,1)]
                 && board[(i,0)] == board[(i,2)]
             {
-                return *board[(i, 0)];
+                return (*board[(i, 0)]).as_ref();
             }
         }
         for i in 0..3 {
@@ -145,20 +146,20 @@ impl TicTacToe<'_> {
                 && board[(0,i)] == board[(1,i)]
                 && board[(0,i)] == board[(2,i)]
             {
-                return *board[(0,i)];
+                return (*board[(0,i)]).as_ref();
             }
         }
         if board[(0,0)] != BoardState::Blank
             && board[(0,0)] == board[(1,1)]
             && board[(0,0)] == board[(2,2)]
         {
-            return *board[(0,0)];
+            return (*board[(0,0)]).as_ref();
         }
         if board[(0,2)] != BoardState::Blank
             && board[(0,2)] == board[(1,1)]
             && board[(0,2)] == board[(2,0)]
         {
-            return *board[(0, 2)];
+            return (*board[(0, 2)]).as_ref();
         }
         None
     }
