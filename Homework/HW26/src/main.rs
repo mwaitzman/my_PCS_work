@@ -79,14 +79,12 @@ pub(crate) enum BoardState<'a> {
     X(Player<'a>),
     Blank,
 }
-impl std::ops::Deref for BoardState<'a> {
-    type Target = Option<Player<'a>>;
-
-    fn deref(&self) -> &Self::Target {
+impl BoardState<'_> {
+    fn get_owner(&self) -> Option<Player> {
         match self {
-            Self::O(player) => &Some(*player),
-            Self::X(player) => &Some(*player),
-            Self::Blank => &None,
+            Self::O(player) => Some(*player),
+            Self::X(player) => Some(*player),
+            Self::Blank => None,
         }
     }
 }
@@ -131,14 +129,14 @@ impl TicTacToe<'a> {
         }
     }
 
-    pub fn check_for_winner(&self) -> Option<&Player> {
+    pub fn check_for_winner(&self) -> Option<Player> {
         let board = &self.board;
         for i in 0..3 {
             if board[(i,0)] != BoardState::Blank
                 && board[(i,0)] == board[(i,1)]
                 && board[(i,0)] == board[(i,2)]
             {
-                return (*board[(i, 0)]).as_ref();
+                return board[(i, 0)].get_owner();
             }
         }
         for i in 0..3 {
@@ -146,20 +144,20 @@ impl TicTacToe<'a> {
                 && board[(0,i)] == board[(1,i)]
                 && board[(0,i)] == board[(2,i)]
             {
-                return (*board[(0,i)]).as_ref();
+                return board[(0,i)].get_owner();
             }
         }
         if board[(0,0)] != BoardState::Blank
             && board[(0,0)] == board[(1,1)]
             && board[(0,0)] == board[(2,2)]
         {
-            return (*board[(0,0)]).as_ref();
+            return board[(0,0)].get_owner();
         }
         if board[(0,2)] != BoardState::Blank
             && board[(0,2)] == board[(1,1)]
             && board[(0,2)] == board[(2,0)]
         {
-            return (*board[(0, 2)]).as_ref();
+            return board[(0, 2)].get_owner();
         }
         None
     }
