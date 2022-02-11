@@ -29,9 +29,11 @@ fn main() {
     for i in 0..9 {
         //render(game);
         if i & 2 == 0 {
-            game.player1.take_turn(&mut game);
+            //The borrow checker forces me to clone this
+            game.player1.clone().take_turn(&mut game);
         } else {
-            game.player2.take_turn(&mut game);
+            //The borrow checker forces me to clone this
+            game.player2.clone().take_turn(&mut game);
         }
         if let Some(player) = game.check_for_winner() {
             game.display_winner(player.name());
@@ -63,6 +65,7 @@ impl Player<'_> {
         todo!()
     }
     fn human_take_turn(&self, ttt: &mut TicTacToe) {
+
         todo!();
     }
     pub fn name(&self) -> &str {
