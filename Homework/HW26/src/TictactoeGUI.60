@@ -1,0 +1,102 @@
+TicTacToeWindow := Window {
+    default-font-size: 40px;
+    width: 640px;
+    height: 480px;
+    property<string> turntaker_name;
+    property<int> turncount;
+    property<string> tile_1_value;
+    property<string> tile_2_value;
+    property<string> tile_3_value;
+    property<string> tile_4_value;
+    property<string> tile_5_value;
+    property<string> tile_6_value;
+    property<string> tile_7_value;
+    property<string> tile_8_value;
+    property<string> tile_9_value;
+    callback tile_clicked(int);
+    TurnInfoBox := HorizontalLayout {
+        PlayerName := Text {
+            font-weight: 900;
+            text: "turntaker: " + root.turntaker_name;
+        }
+        TurnNumber := Text {
+            font-weight: 900;
+            text: "Turn: " + root.turncount;
+        }
+    }
+    TicTacToeGrid := GridLayout {
+
+        width: 90%;
+        height: 90%;
+        y: parent.height * 0.25;
+        Row_1 := Row {
+            Tile_1 := TouchArea {
+                clicked => {tile_clicked(1);}
+                Text {
+                    text: root.tile_1_value;
+                    color: black;
+                }
+            }
+            Tile_2 := TouchArea {
+                clicked => {tile_clicked(2);}
+                Text {
+                    text: root.tile_2_value;
+                    color: black;
+                }
+            }
+            Tile_3 := TouchArea {
+                clicked => {tile_clicked(3);}
+                Text {
+                    text: root.tile_3_value;
+                    color: black;
+                }
+            }
+        }
+        Row_2 :=  Row {
+            Tile_4 := TouchArea {
+                clicked => {tile_clicked(4);}
+                Text {
+                    text: root.tile_4_value;
+                    color: black;
+                }
+            }
+            Tile_5 := TouchArea {
+                clicked => {tile_clicked(5);}
+                Text {
+                    text: root.tile_5_value;
+                    color: black;
+                }
+            }
+            Tile_6 := TouchArea {
+                clicked => {tile_clicked(6);}
+                Text {
+                    text: root.tile_6_value;
+                    color: black;
+                }
+            }
+        }
+        Row_3 := Row {
+            Tile_7 := TouchArea {
+                clicked => {tile_clicked(7);}
+                Text {
+                    text: root.tile_7_value;
+                    color: black;
+                }
+            }
+            Tile_8 := TouchArea {
+                clicked => {tile_clicked(8);}
+                Text {
+                    text: root.tile_8_value;
+                    color: black;
+                }
+            }
+            Tile_9 := TouchArea {
+                clicked => {tile_clicked(9);}
+                Text {
+                    text: root.tile_9_value;
+                    color: black;
+                }
+            }
+        }
+    }
+}

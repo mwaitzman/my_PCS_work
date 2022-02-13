@@ -1,11 +1,14 @@
 [package]
-name = "HW26"
+name = "hw26"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-speedy2d = "1.5"
+slint = "0.2.0"
 rand = "0.8"
 array2d = "0.2"
+
+[build-dependencies]
+slint-build = "0.2.0"

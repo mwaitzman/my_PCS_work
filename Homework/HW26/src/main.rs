@@ -1,17 +1,10 @@
-#![feature(generic_associated_types)]
 #![feature(in_band_lifetimes)]
-
-#![allow(unused_variables)]
-#![allow(unused_imports)]
 use array2d::Array2D;
 use rand::Rng;
-use speedy2d::window::{WindowHandler, WindowHelper};
-use speedy2d::Graphics2D;
-use speedy2d::Window;
-use std::env;
+use std::{sync::Arc, ops::IndexMut, env};
 
+slint::include_modules!();
 fn main() {
-    let window = Window::new_centered("Tictactoe Game", (640, 480)).unwrap();
     let mut game;
     let a = env::args().skip(1).collect::<Vec<String>>();
     let first;
@@ -20,32 +13,125 @@ fn main() {
     if env::args().len() > 1 {
         first = a[0].as_str();
         second = a[1].as_str();
-        game = TicTacToe::new_2_humans(
-            first, second
-        );
+        game = Arc::new(TicTacToe::new_2_humans(first, second));
     } else {
-        game = TicTacToe::new_with_1_cpu();
+        game = Arc::new(TicTacToe::new_with_1_cpu());
     }
-    for i in 0..9 {
-        //render(game);
-        if i & 2 == 0 {
-            //The borrow checker forces me to clone this
-            game.player1.clone().take_turn(&mut game);
-        } else {
-            //The borrow checker forces me to clone this
-            game.player2.clone().take_turn(&mut game);
+
+    let turn = 0;
+    //GUI initialization
+    let t3w = TicTacToeWindow::new();
+    t3w.set_turntaker_name("null".into());
+    t3w.set_turncount(0);
+    t3w.set_tile_1_value("-".into());
+    t3w.set_tile_2_value("-".into());
+    t3w.set_tile_3_value("-".into());
+    t3w.set_tile_4_value("-".into());
+    t3w.set_tile_5_value("-".into());
+    t3w.set_tile_6_value("-".into());
+    t3w.set_tile_7_value("-".into());
+    t3w.set_tile_8_value("-".into());
+    t3w.set_tile_9_value("-".into());
+
+    let t3w_weak = t3w.as_weak();
+    let game_clone = game.clone();
+    t3w.on_tile_clicked(move |picked_tile_number| {
+        if game_clone.game_over {
+            //exit the game if the game's ended and the player clicked something
+            //TODO: make screen-wide touch area so the player can click anywhere when the game is over to close the window, instead of just inside the tiles
+            std::process::exit(0);
         }
-        if let Some(player) = game.check_for_winner() {
-            game.display_winner(player.name());
-            //The WindowHandler will close the window once the user presses a key
-            game.game_over = true;
-            loop {}
+
+        let t3w = t3w_weak.unwrap();
+        
+        //update turn counter
+        turn = t3w.get_turncount();
+        turn += 1;
+        t3w.set_turncount(turn);
+
+        //update the clicked tile to the current player's icon;
+        let clicked_tile = game_clone.board.index_mut(picked_tile_number.try_into().unwrap());
+        clicked_tile = if turn & 1 == 0 {
+            &mut BoardState::O(game_clone.player1.clone())
         }
-    }
-    game.display_cats_game();
-    //The WindowHandler will close the window once the user presses a key
-    game.game_over = true;
-    loop {}
+        else {
+            &mut BoardState::X(game_clone.player2.clone())
+        };
+
+        //update the picked tile's display in the GUI
+        match picked_tile_number {
+            1 => t3w.set_tile_1_value(clicked_tile.display().into()),
+            2 => t3w.set_tile_2_value(clicked_tile.display().into()),
+            3 => t3w.set_tile_3_value(clicked_tile.display().into()),
+            4 => t3w.set_tile_4_value(clicked_tile.display().into()),
+            5 => t3w.set_tile_5_value(clicked_tile.display().into()),
+            6 => t3w.set_tile_6_value(clicked_tile.display().into()),
+            7 => t3w.set_tile_7_value(clicked_tile.display().into()),
+            8 => t3w.set_tile_8_value(clicked_tile.display().into()),
+            9 => t3w.set_tile_9_value(clicked_tile.display().into())
+            }
+
+        //check to see if someone won
+        if let Some(player) = game_clone.check_for_winner() {
+            game_clone.display_winner(player.name());
+            //The ~~WindowHandler~~ (FIXME!) will close the window once the user presses a key
+            game_clone.game_over = true;
+        }
+
+        //if the board's full and no one won, indicate that the game is over
+        if turn == 9 {
+            game.display_cats_game();
+        }
+        
+        //take the CPU's turn immediately after the player if there's a CPU in the game
+        //TODO: add functionality for the CPU to be the first player
+        //NOTE much of the code is duplicated from above
+        //NOTE: various optimization opportunities are available here
+        if let Player::CPU = game_clone.player2 {
+
+            //have the CPU choose an empty file and mark it with their symbol
+            let picked_tile_number = game_clone.cpu_choose_tile();
+            let mut chosen_tile = game_clone.board.index_mut(picked_tile_number.try_into().unwrap());
+            chosen_tile = if turn & 1 == 0 {
+                &mut BoardState::O(game_clone.player1.clone())
+            }
+            else {
+                &mut BoardState::X(game_clone.player2.clone())
+            };
+
+            //update the picked tile's display in the GUI
+            match picked_tile_number {
+                1 => t3w.set_tile_1_value(chosen_tile.display().into()),
+                2 => t3w.set_tile_2_value(chosen_tile.display().into()),
+                3 => t3w.set_tile_3_value(chosen_tile.display().into()),
+                4 => t3w.set_tile_4_value(chosen_tile.display().into()),
+                5 => t3w.set_tile_5_value(chosen_tile.display().into()),
+                6 => t3w.set_tile_6_value(chosen_tile.display().into()),
+                7 => t3w.set_tile_7_value(chosen_tile.display().into()),
+                8 => t3w.set_tile_8_value(chosen_tile.display().into()),
+                9 => t3w.set_tile_9_value(chosen_tile.display().into())
+            }
+
+            //update turn count (again)
+            turn += 1;
+            t3w.set_turncount(turn);
+
+            //check to see if someone won
+            if let Some(player) = game_clone.check_for_winner() {
+                game_clone.display_winner(player.name());
+                //The WindowHandler will close the window once the user presses a key
+                game_clone.game_over = true;
+            }
+            
+            //if the board's full and no one won, indicate that the game is over
+            if turn == 9 {
+                game.display_cats_game();
+            }
+            
+        }
+    });
+
+    t3w.run();
 }
 
 use crate::Player::*;
@@ -55,19 +141,6 @@ enum Player<'a> {
     CPU,
 }
 impl Player<'_> {
-    pub fn take_turn(&self, ttt: &mut TicTacToe) {
-        match self {
-            CPU => self.cpu_take_turn(ttt),
-            Human(_) => self.human_take_turn(ttt),
-        }
-    }
-    fn cpu_take_turn(&self, ttt: &mut TicTacToe) {
-        todo!()
-    }
-    fn human_take_turn(&self, ttt: &mut TicTacToe) {
-
-        todo!();
-    }
     pub fn name(&self) -> &str {
         if let Human(name) = self {
             name
@@ -90,24 +163,34 @@ impl BoardState<'_> {
             Self::Blank => None,
         }
     }
+    fn display(&self) -> &str {
+        todo!();
+    }
 }
 
 struct Board<'a> {
-board: Array2D<BoardState<'a>>
+    board: Array2D<BoardState<'a>>,
 }
-impl Board<'_> {
+impl Board<'a> {
     pub fn new() -> Self {
-	Self {board: array2d::Array2D::filled_with(BoardState::Blank, 3, 3) }
+        Self {
+            board: array2d::Array2D::filled_with(BoardState::Blank, 3, 3),
+        }
+    }
+    pub fn index_mut(&'a mut self, index: u8) -> &'a mut BoardState {
+        let board = &mut self.board;
+        board.index_mut((( index % 3).into(), (index / 3).into() ))
     }
 }
-impl std::ops::Index<(usize, usize)>for Board<'a> {
+impl std::ops::Index<(usize, usize)> for Board<'a> {
     type Output = BoardState<'a>;
     fn index(&self, indices: (usize, usize)) -> &Self::Output {
-    let board = &self.board;
+        let board = &self.board;
         let (row, column) = indices;
         &board.get(row, column).unwrap()
     }
 }
+
 struct TicTacToe<'a> {
     player1: Player<'a>,
     player2: Player<'a>,
@@ -135,30 +218,30 @@ impl TicTacToe<'a> {
     pub fn check_for_winner(&self) -> Option<Player> {
         let board = &self.board;
         for i in 0..3 {
-            if board[(i,0)] != BoardState::Blank
-                && board[(i,0)] == board[(i,1)]
-                && board[(i,0)] == board[(i,2)]
+            if board[(i, 0)] != BoardState::Blank
+                && board[(i, 0)] == board[(i, 1)]
+                && board[(i, 0)] == board[(i, 2)]
             {
                 return board[(i, 0)].get_owner();
             }
         }
         for i in 0..3 {
-            if board[(0,i)] != BoardState::Blank
-                && board[(0,i)] == board[(1,i)]
-                && board[(0,i)] == board[(2,i)]
+            if board[(0, i)] != BoardState::Blank
+                && board[(0, i)] == board[(1, i)]
+                && board[(0, i)] == board[(2, i)]
             {
-                return board[(0,i)].get_owner();
+                return board[(0, i)].get_owner();
             }
         }
-        if board[(0,0)] != BoardState::Blank
-            && board[(0,0)] == board[(1,1)]
-            && board[(0,0)] == board[(2,2)]
+        if board[(0, 0)] != BoardState::Blank
+            && board[(0, 0)] == board[(1, 1)]
+            && board[(0, 0)] == board[(2, 2)]
         {
-            return board[(0,0)].get_owner();
+            return board[(0, 0)].get_owner();
         }
-        if board[(0,2)] != BoardState::Blank
-            && board[(0,2)] == board[(1,1)]
-            && board[(0,2)] == board[(2,0)]
+        if board[(0, 2)] != BoardState::Blank
+            && board[(0, 2)] == board[(1, 1)]
+            && board[(0, 2)] == board[(2, 0)]
         {
             return board[(0, 2)].get_owner();
         }
@@ -170,12 +253,20 @@ impl TicTacToe<'a> {
     pub fn display_cats_game(&self) {
         todo!()
     }
-}
-
-impl WindowHandler for TicTacToe<'_> {
-    fn on_keyboard_char(&mut self, helper: &mut WindowHelper, unicode_codepoint: char) {
-        if self.game_over {
-            helper.terminate_loop();
+    fn cpu_choose_tile(&self) -> u8 {//CPU Chooses a tile here
+        let cpu = &self.player2;
+        let board = &self.board;
+        let mut open_tiles = 0;
+        for x in 0..3 {
+            for y in 0..3 {
+                if board[(x,y)] == BoardState::Blank {
+                    open_tiles += 1;
+                }
+            }
         }
+        let mut rng = rand::thread_rng();
+
+        let pick = rng.gen_range(0..open_tiles);
+        todo!()//actually pick the tile
     }
 }
