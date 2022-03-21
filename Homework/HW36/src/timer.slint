@@ -1,0 +1,55 @@
+import { Button } from "std-widgets.slint";
+
+export struct Time := {
+    minutes: int,
+    seconds: int,
+}
+TimerGUI := Window {
+    property<Time> current-time;
+    property<string> cur-time-string: "00:00";
+    callback start-timer;
+    callback stop-timer;
+    callback restart-timer;
+    max-width: 640px;
+    max-height: 480px;
+    background: #c5e9eb;
+    Start := Button {
+        text: "Start";
+        x: 220px;
+        y: 305px;
+        width: 70px;
+        height: 20px;
+        clicked => { root.start-timer() }
+    }
+    Stop := Button {
+        text: "Stop";
+        x: 310px;
+        y: 305px;
+        width: 70px;
+        height: 20px;
+        clicked => { root.stop-timer() }
+    }
+    Restart := Button {
+        text: "Restart";
+        x: 400px;
+        y: 305px;
+        width: 70px;
+        height: 20px;
+        clicked => { root.restart-timer() }
+    }
+    Rectangle {
+        x: 250px;
+        y: 200px;
+        width: root.width * 0.3;
+        height: root.height * 0.2;
+        background: black;
+
+        Time := Text {
+            text: root.cur-time-string;
+            color: white;
+            x: 25px;
+            y: 25px;
+            font-size: 50px;
+        }
+    }
+}
