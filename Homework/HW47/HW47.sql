@@ -42,7 +42,7 @@ BEGIN
 	-- mark current department as ending today
 	UPDATE dept_emp de
     SET de.to_date = CURRENT_DATE
-    WHERE de.to_date = '9999-01-01';
+    WHERE de.to_date = '9999-01-01' AND de.emp_no = employee;
     
     INSERT INTO de (emp_no, dept_no, from_date, to_date)
     VALUES (

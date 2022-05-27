@@ -1,18 +1,17 @@
 #![feature(in_band_lifetimes)]
-#![feature(box_syntax)]
 use array2d::Array2D;
 use rand::Rng;
 use std::{sync::{Mutex, Arc}, ops::IndexMut, env};
 slint::include_modules!();
 fn main() {
-    let mut game;
+    let game;
     let a = env::args().skip(1).collect::<Vec<String>>();
     let first;
     let second;
     //kinda a stupid/lazy way of doing this, but I'm deciding whether to do a PvP or Player vs CPU game based on the number of args passed to the program, because it's simple, effective, and easy to implement :|
     if env::args().len() > 1 {
-        first = a[0].as_str();
-        second = a[1].as_str();
+        first = a[0].clone();
+        second = a[1].clone();
         game = Arc::new(Mutex::new(TicTacToe::new_2_humans(first, second)));
     } else {
         game = Arc::new(Mutex::new(TicTacToe::new_with_1_cpu()));
@@ -36,11 +35,11 @@ fn main() {
 
     let t3w_weak = t3w.as_weak();
 
-    let mut game_clo = box game.clone();
-    let game_clone = &mut game_clo as *mut Box<Arc<Mutex<TicTacToe>>>;
+    let mut game_clo = game.clone();
+    let game_clone = &mut game_clo as *mut Arc<Mutex<TicTacToe>>;
 
     t3w.on_tile_clicked(move |picked_tile_number| {
-        let mut game_clone = unsafe {&*game_clone};
+        let game_clone = unsafe {&*game_clone};
         if (*game_clone.lock().unwrap()).game_over {
             //exit the game if the game's ended and the player clicked something
             //TODO: make screen-wide touch area so the player can click anywhere when the game is over to close the window, instead of just inside the tiles
@@ -55,12 +54,12 @@ fn main() {
         t3w.set_turncount(turn);
 
         //update the clicked tile to the current player's icon;
-        let mut clicked_tile = (*game_clone.lock().unwrap()).board.index_mut(picked_tile_number.try_into().unwrap());
-        clicked_tile = if turn & 1 == 0 {
-            &mut BoardState::O((*game_clone.lock().unwrap()).player1.clone())
+        let mut clicked_tile = ((*game_clone).get_mut().unwrap()).board.index_mut(picked_tile_number.try_into().unwrap());
+        *clicked_tile = if turn & 1 == 0 {
+            BoardState::O((*game_clone.lock().unwrap()).player1.clone())
         }
         else {
-            &mut BoardState::X((*game_clone.lock().unwrap()).player2.clone())
+            BoardState::X((*game_clone.lock().unwrap()).player2.clone())
         };
 
         //update the picked tile's display in the GUI
@@ -98,11 +97,11 @@ fn main() {
             //have the CPU choose an empty file and mark it with their symbol
             let picked_tile_number = (*game_clone.lock().unwrap()).cpu_choose_tile();
             let mut chosen_tile = (*game_clone.lock().unwrap()).board.index_mut(picked_tile_number.try_into().unwrap());
-            chosen_tile = if turn & 1 == 0 {
-                &mut BoardState::O((*game_clone.lock().unwrap()).player1.clone())
+            *chosen_tile = if turn & 1 == 0 {
+                BoardState::O((*game_clone.lock().unwrap()).player1.clone())
             }
             else {
-                &mut BoardState::X((*game_clone.lock().unwrap()).player2.clone())
+                BoardState::X((*game_clone.lock().unwrap()).player2.clone())
             };
 
             //update the picked tile's display in the GUI
@@ -209,10 +208,10 @@ struct TicTacToe<'a> {
     game_over: bool,
 }
 impl TicTacToe<'a> {
-    pub fn new_2_humans(n1: &'a str, n2: &'a str) -> Self {
+    pub fn new_2_humans(n1: String, n2: String) -> Self {
         Self {
-            player1: Player::Human::<'a>(n1),
-            player2: Player::Human(n2),
+            player1: Player::Human::<'a>(n1.as_str()),
+            player2: Player::Human(n2.as_str()),
             board: Board::new(),
             game_over: false,
         }
@@ -258,14 +257,14 @@ impl TicTacToe<'a> {
         }
         None
     }
-    pub fn display_winner(&self, winner_name: &str) {
+    pub fn display_winner(&self, _winner_name: &str) {
         todo!();
     }
     pub fn display_cats_game(&self) {
         todo!();
     }
     fn cpu_choose_tile(&self) -> u8 {
-        let cpu = &self.player2;
+        let _cpu = &self.player2;
         let board = &self.board;
         let mut open_tiles = 0;
         let mut tiles = vec![0u8;9];
