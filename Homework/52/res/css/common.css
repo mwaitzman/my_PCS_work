@@ -1,0 +1,20 @@
+html {
+    background-color: #090101;
+}
+
+body {
+    color: #cff263;
+    text-align: center;
+}
+
+a {
+    color: #2c83e7;
+}
+
+nav {
+    margin-top: 0.45em;
+    padding-top: 0.3em;
+    border-top: #c6a972;
+    border-top-style: solid;
+    border-top-width: 1.3pt;
+}
