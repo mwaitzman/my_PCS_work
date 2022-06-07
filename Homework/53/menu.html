@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ning Fong's Menu</title>
+    <link rel="stylesheet" href="res/css/common.css">
+    <style>
+        h1 {
+            font-size: 3em;
+            /*font-weight: bolder;/* not supported by default font*/
+        }
+
+        #menu {
+            max-width: 80%;
+            text-align: center;
+            border-style: double;
+            border-radius: 5em;
+            background-color: #3a1313;
+            max-width: 80%;
+            box-sizing: border-box;
+            width: 40%;
+        }
+
+        #menu h1 {
+            letter-spacing: 0.5px;
+            text-shadow: 5px 5px #56334d;
+        }
+        .menu-item {
+            margin: 0 auto;
+            text-align: center;
+            padding-bottom: 3px;
+            list-style-type: none;
+            
+            /*For some reason, the border just doesn't display for the first 10% or so of the space. I have no clue why, and no clue how to fix it */
+            border-bottom-style: ridge;
+        }
+
+        /* What's the idiomatic way of excluding the first/last items? making a `last` class and giving it to the final item, then doing `.menu-item .last` instead of this horrible id nonsense doesn't work*/
+        #last-menu-item {
+            border-bottom-style: none;
+        }
+
+        .menu-item-title {
+            color:rgb(200, 231, 0);
+        }
+
+        .menu-item a {
+            border-style: outset;
+            border-radius: 10%;
+            text-decoration: none;
+        }
+        
+        /* suddenly broken??? I hate CSS*/
+        a.menu-item:hover {
+            transition: background-color .6s;
+            background-color: #3a1313;
+        }
+    </style>
+</head>
+<body>
+    <p id="ning-fong-logo">
+        Ning Fong's
+    </p>
+
+
+    <nav id="menu">
+        <h1>Our Menu</h1>
+        <ul>
+            <li class="menu-item">
+                <h2 class="menu-item-title">Delicious pancakes</h2>
+                <img src="/res/media/images/pancake.jpg" alt="image of a pancake" width="200" height="200">
+                <p>Delicious pancakes with a special surprise added</p>
+                <a href="pancake.html">More info</a>
+            </li>
+            
+            <li class="menu-item" id="last-menu-item">
+                <h2 class="menu-item-title">Heroin Mist</h2>
+                <img src="/res/media/images/sierra_mist.png" alt="image of a can of Sierra Mist" width="200" height="200">
+                <p>Sierra mist with added heroin</p>
+            </li>
+            </ul>
+    </nav>
+
+
+    <nav>
+        <a href="index.html">back to the homepage</a>
+    </nav>
+
+    <div id="license-section">
+        <p>Copyright (C) 2022 mwaitzman</p>
+        <img src="res/media/images/agplv3-with-text-162x68.png" alt=official AGPL3 icon">
+    </div>
+</body>
+</html>
