@@ -1,0 +1,44 @@
+html {
+    background-color: #090101;
+}
+
+body {
+    margin-bottom: 7em;
+    color: #cff263;
+    text-align: center;
+}
+
+a {
+    color: #2c83e7;
+}
+
+nav {
+    margin-top: 0.45em;
+    padding-top: 0.3em;
+    border-top: #c6a972;
+    border-top-style: solid;
+    border-top-width: 1.3pt;
+}
+
+#license-section {
+    margin-top: 1em;
+    border-top-style: dashed;
+    color: #aa493b;
+    position: fixed;
+    bottom: 0;
+    left: 45%;
+
+}
+
+#ning-fong-logo {
+    transform: skew(189deg, -7deg);
+    font-size: 4rem;
+    background: -webkit-linear-gradient(#923ba7, #F33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+    font-family: 'Carattere', cursive;
+}
+
+.clear-fix {
+    clear: both;
+}
