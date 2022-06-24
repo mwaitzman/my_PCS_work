@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+    <html lang=en>
+    <head>
+        <meta charset=UTF-8>
+        <title>Ning Fong's pancakes</title>
+        <link rel="stylesheet" href="res/css/css-reset.css">
+        <link rel="stylesheet" href="res/css/common.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="res/media/images/favicon/a.png">
+        <style>
+            h1 {
+                font-style: italic;
+            }
+
+            #complaint-table {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 25%;
+            }
+            #complaint-table h2 {
+                font-size: 135%;
+                color: #c2435b;
+            }
+            tbody tr:nth-child(odd){
+                background-color: #853248;
+            }
+            tbody tr:nth-child(even){
+                background-color: #124892;
+            }
+
+            table>tbody>tr>td:last-child {
+                color: #110;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="ning-fong-logo">
+            Ning Fong's
+        </p>
+    
+        <h1>Ning Fong's delicious pancakes</h1>
+        <p>Our crack pancakes are truly to die for. We put only the cheapest quality crack into our pancakes, to ensure you come back for more.</p>
+        <h4>$40 for 3 pancakes</h4>
+
+
+        <table id="complaint-table">
+            <caption>
+                <h2>complaints</h2>
+            </caption>
+            <thead>
+                <tr>
+                    <th>year</th>
+                    <th>laced fentanyl complaints</th>
+                    <th>garbage quality complaints</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2021</td>
+                    <td>53</td>
+                    <td>1845</td>
+                </tr>
+                <tr>
+                    <td>2020</td>
+                    <td>364</td>
+                    <td>1674</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>returning customers:</td>
+                    <td>ALL</td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+        <form method="POST" action="feedback.php">
+            <input type="text" name="name" placeholder="name (optional)" minlength="3">
+            <input type="email" name="email" placeholder="email (optional)"/>
+            <label>
+                Date of Feedback:
+                <input name="date" type="date"/>
+            </label>
+            <label>
+                Rating:
+                <input name="rating" type="range" min=1 max="10" required/>
+            </label>
+            <textarea name="comment" placeholder="add a comment (optional)"></textarea>
+            <label>
+                click to submit (or press enter)
+                <input type="submit"/>
+            </label>
+        </form>
+
+
+        <nav>
+            <a href="index.html">back to the homepage</a>
+        </nav>
+
+        <div id="license-section">
+            <p>Copyright &copy; 2022 mwaitzman</p>
+            <img src="res/media/images/agplv3-with-text-162x68.png" alt=official AGPL3 icon">
+    </body>
+    </html>

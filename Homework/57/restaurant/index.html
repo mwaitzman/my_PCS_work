@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ning Fong's (home page)</title>
+    <link rel="stylesheet" href="res/css/css-reset.css">
+    <link rel="stylesheet" href="res/css/common.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="res/media/images/favicon/a.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="res/css/common-small-screen.css" media="screen and (max-width: 900px)">
+    <style>
+        body {
+            box-shadow: 0px -20px 200px 20px #048823;
+            border-style: solid;
+            border-radius: 15%;
+            border-color: #170606;
+            border-width: 15em;
+            background: linear-gradient(-45deg, rgb(252, 42, 36) 0%, rgb(48, 52, 5) 15%, rgb(9, 121, 100) 85%);
+        }
+        h1 {
+            font-family: "Segoe UI", "Helvetica Neue";
+            font-style: oblique;
+            font-weight: 900;
+
+            color: #dcc83d;
+
+
+            padding-bottom: 0.3em;
+            position: absolute;
+            left: 0;
+            right: 0;
+            transform: rotate(-3deg);
+        }
+        img, a {
+            display:block;
+            margin: 40px auto;
+        }
+        nav {
+            margin-top: 3.5px;
+            border-top-style: double;
+        }
+        nav a:hover {
+            border-style: inset;
+            border-radius: 1ex;
+            /* how do I change the border width - the perimeter that is - not the thickness */
+        }
+        @media screen and (max-width: 900px) {
+        img, a {
+          margin: 10px auto;
+        }
+        h1~img {
+            margin-top: 25px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <p id="ning-fong-logo">
+        Ning Fong's
+    </p>
+
+    <h1>magnificent restaurant</h1>
+    <img src="res/media/images/menu_icon.jpg" alt="generic menu icon" width="200" height="200"> 
+
+    <nav>
+        <a href="menu.html">View our menu</a>
+
+        <a href="about.html">About us</a>
+    </nav>
+
+    <div id="license-section">
+        <p>Copyright &copy; 2022 mwaitzman</p>
+        <img src="res/media/images/agplv3-with-text-162x68.png" alt=official AGPL3 icon">
+    </div>
+</body>
+</html>
