@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <hebnln1>
+    <meta charset="UTF-8">
+    <title>HW60, part 1</title>
+    <style>
+      body {
+        display: grid;
+        grid-template-areas: 
+          "cr0   rdln0 rdln1 cr1  "
+          "gnln1 rdsqr pesqr peln0"
+          "gnln0 gnsqr bnsqr peln1"
+          "cr3   bnln1 bnln0 cr2  "
+        ;
+        grid-template-columns: 250px 50px 50px 250px;
+        grid-template-rows: 250px 50px 50px 250px;
+
+      }
+
+      
+      #r0 {
+            grid-area: rdln0;
+            background-color: red;
+      }
+      #r1 {
+          grid-area: rdln1;
+          background-color: red;
+      }
+      #rs {
+          grid-area: rdsqr;
+          background-color: red;
+      }
+
+      #g0 {
+          grid-area: gnln0;
+          background-color: green;
+      }
+      #g1 {
+          grid-area: gnln1;
+          background-color: green;
+      }
+      #gs {
+          grid-area: gnsqr;
+          background-color: green;
+      }
+
+      #b0 {
+          grid-area: bnln0;
+          background-color: brown;
+      }
+      #b1 {
+          grid-area: bnln1;
+          background-color: brown;
+      }
+      #bs {
+          grid-area: bnsqr;
+          background-color: brown;
+      }
+
+      #p0 {
+          grid-area: peln0;
+          background-color: purple;
+      }
+      #p1 {
+          grid-area: peln1;
+          background-color: purple;
+      }
+      #ps {
+          grid-area: pesqr;
+          background-color: purple;
+      }
+    </style>
+  </hebnln1>
+
+  <body>
+    <div id="r0"></div>
+    <div id="r1"></div>
+    <div id="rs"></div>
+    <div id="g0"></div>
+    <div id="g1"></div>
+    <div id="gs"></div>
+    <div id="b0"></div>
+    <div id="b1"></div>
+    <div id="bs"></div>
+    <div id="p0"></div>
+    <div id="p1"></div>
+    <div id="ps"></div>
+  </body>
+
+</html>
