@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW60 P2</title>
+    <style>
+        body {
+            background-color: #232831;
+            display: grid;
+            grid-template-areas: "g1 g2" "g3 g4" "g5 g6" "l1 l1"
+            grid-template-rows: 110px 100px 100px;
+            grid-template-columns: 80px 130px 80px;
+        }
+        div {
+            color: #93b954;
+            justify-content: center;
+        }
+        #license-section {
+            grid-area: l1;
+        }
+        @media screen and (min-width: 600px) {
+            body {
+                grid-template-areas: "g1 g2 g3" "g4 g5 g6" "l1 l1 l1";
+            }
+        }
+        @media screen and (min-width: 1200px) {
+            body {
+                grid-template-areas: "g1 g2 g3 g4 g5 g6" "l1 l1 l1 l1 l1 l1";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>CSS is garbage</div>
+    <div>CSS really sucks!</div>
+    <div>Down with CSS!</div>
+    <div>I prefer raw vulkan calls over this garbage</div>
+    <div>CSS drives you insane</div>
+    <div>I hate CSS</div>
+    <div id="license-section">
+        Copyright &copy; 2022 mwaitzman
+    </div>
+</body>
+</html>
