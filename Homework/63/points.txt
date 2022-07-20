@@ -1,0 +1,2 @@
+1
+I implemented every one of the points in the directions, except the table scrolling doesn't seem to be working, so -1 for that I guess

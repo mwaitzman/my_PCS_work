@@ -1,0 +1,6 @@
+For homework, work on a bootstrap version of the site we did for the test. The focus here is bootstrap, so don't worry about trying to do exactly what I asked for, instead try to do something similar in the spirit of bootstrap.. A goal might be to write as little custom css on your own as possible, and instead do as much by applying their classes as possible.
+
+Do as much as you can, we likely won't complete every detail in class either as we dont want to spend another whole class on it. We will try to hit the main points, but may not do every last thing.
+
+As far as marking the test. As discussed, you need to mark your own test for the "does it do what I asked it to do" part. For each item called out that you were supposed to do, that you feel your submission didnt do, add a point. Please add a document "points.txt" to the same folder as the test where you document the number of points (you can include any other comments you like as well) and commit to git and push to Github. This way I have your points and your test in one spot and can refer to it as needed.
+I will of course be looking at everyones tests as well to see general techniques used and make sure things were done in a reasonable way.
