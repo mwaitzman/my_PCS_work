@@ -1,0 +1,29 @@
+{
+    // See http://jshint.com/docs/ for more details
+
+    "maxerr"        : 42,       // {int} Maximum error before stopping
+
+    // Enforcing
+    "bitwise"       : false,     // true: Prohibit bitwise operators (&, |, ^, etc.)
+    "camelcase"     : false,    // true: Identifiers must be in camelCase
+    "curly"         : true,     // true: Require {} for every new block or scope
+    "eqeqeq"        : true,     // true: Require triple equals (===) for comparison
+    "plusplus"      : false,    // true: Prohibit use of `++` and `--`
+    "quotmark"      : "double",    // Quotation mark consistency:
+                                //   false    : do nothing (default)
+                                //   true     : ensure whatever is used is consistent
+                                //   "single" : require single quotes
+                                //   "double" : require double quotes
+    "undef"         : true,     // true: Require all non-global variables to be declared (prevents global leaks)
+    "varstmt"       : true,    // true: Disallow any var statements. Only `let` and `const` are allowed.
+
+    // Relaxing
+    "asi"           : false,     // true: Tolerate Automatic Semicolon Insertion (no semicolons)
+    
+    // Environments
+    "browser"       : true,     // Web Browser (window, document, etc)
+    "devel"         : true,     // Development/debugging (alert, confirm, etc)
+
+    // Custom Globals
+    "globals"       : {}        // additional predefined global variables
+}
