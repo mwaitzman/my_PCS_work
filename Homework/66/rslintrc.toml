@@ -1,0 +1,5 @@
+[errors]
+formatter = "long"
+
+[rules]
+groups = ["errors", "style"]
