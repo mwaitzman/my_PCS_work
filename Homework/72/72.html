@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HW72</title>
+	<script src="72.js" defer></script>
+	<style>
+		table {
+			border-collapse: collapse;
+		}
+		th, td {
+			border: 1px solid #FA35C7;
+			color: #7DD013;
+			background-color: #351106;
+		}
+	</style>
+</head>
+<body>
+	<p>Some("text")</p>
+	<button id="toggle_color_changing_button">Stop changing colors</button>
+	<table id ="color_history_table">
+		<thead>
+			<tr>
+				<th>Colors used</td>
+				<th>Time</td>
+				<!-- <th>Adjustments</td> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td
+				colspan="3"
+				style="text-align: center;"
+				id="table_placeholder_text"
+				>
+					No history yet
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
