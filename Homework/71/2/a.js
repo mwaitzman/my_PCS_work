@@ -25,3 +25,5 @@ app.Counter = ( function() {
 	};
 })();
 >>>>>>> a826897647a133ba5bec95988396fdb9b923516f
+
+// SL - code has an unresolved merge - but looks good

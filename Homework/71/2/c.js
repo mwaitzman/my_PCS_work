@@ -50,3 +50,6 @@ console.log(`Counter's counter: ${Counter.get()}\nc1: ${c1.get()}\nc2:${c2.get()
 	console.log(`Counter's counter: ${Counter.get()}\nc1: ${c1.get()}\nc2:${c2.get()}\ncounters created with CounterBuilder: ${CounterBuilder.created()}`);
 })();
 >>>>>>> a826897647a133ba5bec95988396fdb9b923516f
+
+// SL - and again
+// SL grade - 99.9 (-.1 for the unreolved merge)

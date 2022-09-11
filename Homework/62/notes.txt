@@ -1,0 +1,4 @@
+products areas are random sizes. Design called them to be about the same. Not sure why you felt the need to substitute the pictures but lots of whitespace around the one you used. Maybe domething like .product img, .products video { height: 200px; } would have been a good idea
+Also candy.png wasnt commited..
+
+grade - 98

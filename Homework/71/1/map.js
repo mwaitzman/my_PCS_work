@@ -1,4 +1,6 @@
 "use strict";
+
+// SL - do these variables mean something to you? If yes, ok I guess, but meaningful names that other developers understand are very important. So fnMut (function mutate?) and tranny_arr??? not great choices I dont think
 const map = (arr, fnMut) => {
 	let tranny_arr = [];
 	for (let idx = 0; idx < arr.length; idx++) {

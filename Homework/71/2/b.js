@@ -13,7 +13,7 @@ app.CounterBuilder = ( function() {
 			get: () => count
 		};
 	};
-	
+
 	return {
 		new_default: new_default,
 		created: () => created,
@@ -37,7 +37,7 @@ app.CounterBuilder = ( function() {
 			get: () => count
 		};
 	};
-	
+
 	return {
 		new_default: new_default,
 		created: () => created,
@@ -45,3 +45,5 @@ app.CounterBuilder = ( function() {
 
 })();
 >>>>>>> a826897647a133ba5bec95988396fdb9b923516f
+
+// SL - also has an unresolved merge - but looks good
