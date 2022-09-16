@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW74</title>
+    <style>
+      .messageBox {
+        background-color: lightgreen !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input id="msgText">
+    modal<input type="checkbox" id="modal">
+    <button id="showMsg">show</button>
+    <hr>
+    ipsum dolor sit amet consectetur adipisicing elit. In, odit ut facilis officiis, cum repellat eligendi consectetur hic aliquid neque animi quidem pariatur, illo odio mollitia quod unde! Eos ratione veniam vitae reiciendis rerum illum, ab odit autem dolores vel quis incidunt esse cum aut. Quasi eum sapiente, dicta doloremque necessitatibus labore tenetur fuga rem, dolorum quia odit doloribus deserunt, iusto quos accusantium deleniti. Et culpa laboriosam vel laudantium commodi molestiae cum ea! Sed, veniam repellendus doloremque eos ratione facilis minus nesciunt, voluptas consequuntur quibusdam et dignissimos. Esse harum magnam assumenda distinctio. Necessitatibus dolorem tempora magnam dolorum saepe placeat repellat facere porro inventore error laudantium debitis impedit vero iusto, dolore at officiis enim excepturi a provident? Dolorum reprehenderit provident error fuga omnis fugit beatae quidem, mollitia nesciunt placeat, illo debitis facere. Eum deserunt commodi expedita tempora vero illum aliquid minus ipsa praesentium nisi rem facilis aperiam, voluptatem, unde eveniet obcaecati! Vero, commodi laboriosam nemo distinctio inventore autem maiores quos laborum qui sint quibusdam ad error sit fuga omnis temporibus accusamus dolor provident? Repellendus corrupti doloremque maiores, beatae facere molestias similique, quod quis optio, aliquam odio laudantium voluptas explicabo aliquid atque expedita tempora vero neque. Pariatur asperiores a architecto dolorem, voluptatum, at officiis amet necessitatibus quidem fugiat laboriosam. Eius, itaque soluta facilis molestias quibusdam minus vel dolorum minima, possimus laboriosam voluptas doloremque totam harum repellendus fugiat deserunt nam cumque voluptates facere, ipsum corporis. Perspiciatis, neque? Nesciunt perferendis natus et, minima quasi itaque labore. Eius asperiores itaque reprehenderit ipsum repellat blanditiis a ea assumenda aliquid? Possimus sequi vel accusantium culpa rerum at ex quas, magni sunt earum, vitae maxime, repudiandae necessitatibus! Numquam reiciendis reprehenderit ipsum, deleniti dolore veniam non quas error odio ipsa repellendus magnam officia, nemo consequuntur sed rerum delectus exercitationem tempora vero dolor sapiente. Ullam amet necessitatibus incidunt ut explicabo et magni autem corporis nemo illo quia accusamus, totam saepe. Accusantium alias cupiditate quo animi ea, nihil eaque. Cumque rem molestias iure fugiat adipisci, ad placeat. Asperiores eligendi laboriosam, commodi eaque distinctio quod, minima blanditiis officiis natus magnam maxime mollitia a quisquam qui exercitationem quam, labore laborum! Delectus tempora quae exercitationem beatae temporibus totam. Qui at accusamus, fugiat aliquam laborum possimus facere iure exercitationem eaque odit sapiente eum, veniam, quae debitis. Magni perferendis excepturi exercitationem consequatur eveniet repudiandae repellat eius amet officia tempora officiis autem soluta, reiciendis illum veritatis itaque voluptates numquam natus! Tenetur, molestiae iusto! Sapiente quos minus illum distinctio, porro vero pariatur, error explicabo perspiciatis facere fugit incidunt, asperiores fuga accusamus nulla quis quia! Esse tenetur quia vitae blanditiis fugiat dolores, explicabo nisi neque, officia ex ipsum. Officiis ad aperiam neque maxime aliquid possimus voluptate unde asperiores iusto autem maiores accusantium explicabo cumque sapiente est pariatur dolor dolorum ab omnis, magnam non quasi! Assumenda at fugiat repudiandae praesentium! Possimus dolor sapiente cum, sit saepe perspiciatis eos magni magnam asperiores assumenda est temporibus, laudantium sed dolorum doloremque placeat fuga dolores deserunt iure eveniet minus! Voluptatibus commodi iste facilis doloremque architecto nemo nesciunt, labore dolore nostrum sapiente quod fugit est.
+    <script src="messageBox.js"></script>
+    <script>
+		//   app.messageBox.show('Hello World!');
+		const msgText = document.getElementById('msgText');
+		const modal = document.getElementById('modal');
+		document.getElementById('showMsg').addEventListener('click', () => {
+			app.messageBox.show(msgText.value, modal.checked);
+		});
+
+		
+		app.messageBox.show(
+			'Is this enough homework?', ['Yes', 'No', 'Maybe'],
+			usersChoice => console.log('You picked ' + usersChoice)
+		);
+    </script>
+  </body>
+
+</html>
