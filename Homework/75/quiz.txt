@@ -1,0 +1,15 @@
+quiz
+
+Create 40 random people where a person has a unique id, a first name, a last name, and a gender.
+Make 20 male, and 20 female. Pair them up to each so that each has a spouse of the correct gender.
+Print out the people to the console, maybe something like this
+
+id 0, first: Bill, last: Obama, gender: m, spouse: Michelle Clinton - 1
+id 1, first: Michelle, last: Clinton, gender: f, spouse: Bill Obama - 0
+id 2, first: Bill, last: Biden, gender: m, spouse: Jill Biden - 3
+id 3, first: Jill, last: Biden, gender: f, spouse: Bill Biden - 2
+<snip..>
+id 38, first: Bill, last: Clinton, gender: m, spouse: Melania Clinton - 39
+id 39, first: Melania, last: Clinton, gender: f, spouse: Bill Clinton - 38
+
+It should not be possible for another developer to see anything about these people from another JavaScript file.
