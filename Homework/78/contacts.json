@@ -1,0 +1,14 @@
+[
+  {
+    "first": "Joe",
+    "last": "Biden",
+    "email": "jbiden@whitehouse.gov",
+    "phone": "123456789"
+  },
+  {
+    "first": "Kamala",
+    "last": "Harris",
+    "email": "kharris@whitehouse.gov",
+    "phone": "987654321"
+  }
+]

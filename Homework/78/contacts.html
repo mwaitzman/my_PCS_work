@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: auto;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 1em;
+      }
+
+      #newContactForm {
+        display: none;
+        background-color: lightblue;
+        padding: 1em;
+        height: 8em;
+        width: 15em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -7.5em;
+        margin-top: -4em;
+      }
+
+      .formgroup {
+        margin-bottom: .5em;
+      }
+
+      .formgroup label {
+        display: inline-block;
+        width: 3em;
+      }
+
+      .buttons {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="add">add contact</button>
+	<button id="load_existing">load existing</button>
+    <table id="contactsTable">
+      <thead>
+        <tr>
+          <td>first</td>
+          <td>last</td>
+          <td>email</td>
+          <td>phone</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5">no contacts loaded</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form id="newContactForm">
+      <div class="formgroup">
+        <label for="first">first:</label>
+        <input id="first" required>
+      </div>
+      <div class="formgroup">
+        <label for="last">last:</label>
+        <input id="last" required>
+      </div>
+      <div class="formgroup">
+        <label for="email">email:</label>
+        <input id="email" type="email">
+      </div>
+      <div class="formgroup">
+        <label for="phone">phone:</label>
+        <input id="phone">
+      </div>
+      <div class="buttons">
+        <button>add</button>
+        <button type="reset">reset</button>
+        <button type="button" id="cancel">cancel</button>
+      </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="contacts.js"></script>
+  </body>
+
+</html>
