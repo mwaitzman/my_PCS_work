@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>HW79</title>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+		<script src="79.js" defer></script>
+		<style>
+			#recipe_data {
+				display: grid;
+				grid-template-areas:
+				"name image"
+				"ingredients image";
+
+				border-style: solid;
+				border-width: 1.5px;
+
+				margin-top: 5px
+			}
+			#recipe_name {
+				grid-area: name;
+
+				text-align: center;
+			}
+			#recipe_ingredients {
+				grid-area: ingredients;
+				
+				overflow: auto;
+
+				padding-right: 12px;
+			}
+			#recipe_image {
+				grid-area: image;
+
+				max-width: 100%;
+				height: auto
+			}
+		</style>
+	</head>
+	<body>
+		<select id="recipe_select">
+			<option id="recipe_select_placeholder_entry">choose a recipe</option>
+		</select>
+
+		<div id="recipe_data">
+			<h4 id="recipe_name">no recipe loaded</h4>
+			<ul id="recipe_ingredients"></ul>
+			<img id="recipe_image"></img>
+		</div>
+	</body>
+</html>
