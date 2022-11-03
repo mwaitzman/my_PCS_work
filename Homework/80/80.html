@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>HW80</title>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+		<script src="80.js" defer></script>
+		<style>
+			#main_container {
+				display: flex;
+			}
+			#vid_selector {
+				display: grid;
+				grid-template-areas:
+					"prev total next"
+					"vid_list vid_list vid_list";
+			}
+			#vid_list {
+				grid-area: vid_list-start;
+			}
+			#prev_btn {
+				grid-area: prev-start;
+			}
+			#total {
+				grid-area: total-start;
+				padding: 0 8px
+			}
+			#next_btn {
+				grid-area: next-start;
+				margin-right: 10px
+			}
+			.vid_list_item {
+				border-style: outset;
+				border-width: 1px;
+				display: flex;
+			}
+			.thumbnail {
+				max-width: 128px;
+				max-height: 128px;
+				border-style: ridge;
+				border-width: 1px;
+				margin: 5px;
+			}
+			.tl {
+				width: 50%
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main_container">
+			<div id="vid_selector">
+				<ol id="vid_list">
+				</ol>
+
+				<button id="prev_btn">previous page</button>
+				<p id="total">0 through 0 out of 0 shown</p>
+				<button id="next_btn">next page</button>
+			</div>
+
+			<div>
+				<h3 id="vid_title">no video loaded</h3>
+				<video id ="loaded_vid"></video>
+			</div>
+		</div>
+	</body>
+</html>
