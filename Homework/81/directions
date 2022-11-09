@@ -1,0 +1,9 @@
+Please do the following for homework.
+
+Build a photo viewing app. Present the user with a search box and a button. When the user clicks the button, load pictures and display them to the user. You can pretend to honor the search by having 2 different files e.g. dogs,json and cats,json. If the user enters dogs you fetch the dogs file, if they enter cats you return the cats, otherwise you return nothing...
+
+Show title and picture for each picture. If you want to get fancy, show one picture at a time with next and previous buttons (i.e. a carousel - but do this after you get the simple case, showing all the pictures at once, working)
+
+Take some time to make something impressive that you would be proud to show to someone. Dont just throw the pictures on the page. Use your combined html/css/javascript skills to make the page nice and the user experience impressive.
+
+(Note that as mentioned there are free photo apis out there that could be used that would perhaps make this example more impressive but we will stick with a homegrown json file and pictures instead rather than have to use something likely blocked (for good reason) by most filters.)
