@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>HW81</title>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+		<script src="81.js" defer></script>
+		<style>
+			/* #perform_search:hover {
+
+			} */
+			/*IDR: is the second #match_area redundant?*/
+			#match_area img, #match_area h4 {
+				max-width: 300px;
+				max-height: 300px;
+				
+			}
+			#match_area img {
+				border: solid red 3px;
+				border-radius: 1em;
+			}
+			#text_output {
+				border: 3px #054549 groove;
+				border-radius: 0.5em;
+				width: fit-content;
+				padding: 0.6em;
+				padding-top: 0.4em;
+				padding-top: 0.2em;
+				text-align: center;
+				color: #b9a614;
+				background-color: #110330;
+				height: fit-content;
+				
+			}
+			body {
+				display: grid;
+				grid-template-areas:
+				"search text_output"
+				"matches text_output";
+			}
+			.with_matches {
+				background-color: #1a113253;
+			}
+			.error {
+				color: red;
+				text-transform: uppercase;
+			}
+			button, select, input {
+				background-color: #1b1a08;
+				color: #43c1aa;
+				border: #267e4a;
+				border-style: ridge;
+				border-radius: 0.7em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="input_area">
+			<input
+			id="search_box"
+			type="text"
+			placeholder="enter the term to search for"
+			>
+			<button
+			id="perform_search"
+			type="button"
+			title="(better yet, press C-RET when focus is on the search box for the same thing, just more efficient)"
+			>perform search
+			</button>
+		</div>
+		<select id="mode_select">
+            <option selected="selected">fixed string (with substring comparison)</option>
+			<option>glob pattern (Unix-like, case-SENSITIVE)</option>
+			<option>regex (whatever JS's default impl is...)</option>
+        </select>
+		<div id="match_area"></div>
+		<pre id="text_output"></pre>
+	</body>
+</html>
