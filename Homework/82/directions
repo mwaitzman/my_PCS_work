@@ -1,0 +1,49 @@
+For homework please do the following:
+
+-Create a google maps / wikipedia data mashup app that allows users to search for wikipedia data and display it on the map. Look to code from class for examples of pretty much everything you need to do. Use your own api keys instead of mine that were used in the files from class, see below.
+
+For google maps you will need an account and an API key - see https://developers.google.com/maps/gmp-get-started They walk you through setting things up. Be sure to restrict your API key as described here  - https://developers.google.com/maps/documentation/javascript/get-api-key to make sure no one can use it on a different site and cost you money, also not a good idea to include the key in code you commit to a public repo (which anyone can see)
+(I set the following settings to lock down my key:
+
+    Application restrictions - Http referrers (web sites) only
+    Website restrictions - add http://127.0.0.1:5500/* to only allow a dev site served from local machine (important - port must be the port you use - live server default is 5500, and you must include * wild card at end)
+    API restrictions - right now we only need access to Maps JavaScript API you can of course add more if you want to try them out)
+
+The service we will use for wikipedia data is "geonames". Just like google maps, you need to sign up and get a key, in this case, a user name. You can sign up here:
+http://www.geonames.org/login
+
+Geonames supports CORS so you can just make a normal fetch call.
+
+We will use the Wikipedia Fulltext Search API
+You pass along q=WHAT_YOU_ARE_SEARCHING_FOR as part of the query and get results about that. (it also takes maxRows to control how many items you get back, default is 10, not sure how many you're allowed but I wouldn't advise trying thousands... there are some other params like lang if you want to try that - see docs for full details - https://www.geonames.org/export/wikipedia-webservice.html#wikipediaSearch)
+
+Following is a snippet of the json received from the following query:
+http://api.geonames.org/wikipediaSearch?q=yeshiva&maxRows=10&username=slubowsky&type=json
+(use your own username instead of slubowsky)
+
+{"geonames":[{"summary":"Slutsk (officially transliterated as Sluck, ; ; , , Yiddish/Hebrew: סלוצק Slotsk) is a city in Belarus, located on the Sluch River south of Minsk. As of 2010 its population is of 61,400. (RAR file format) Slutsk is the administrative center of Slutsk Raion. (...)","elevation":149,"geoNameId":621741,"feature":"city","lng":27.55,"countryCode":"BY","rank":100,"thumbnailImg":"https://www.geonames.org/img/wikipedia/136000/thumb-135009-100.jpg","lang":"en","title":"Slutsk","lat":53.016667,"wikipediaUrl":"en.wikipedia.org/wiki/Slutsk"},{"summary":"Yeshiva University...
+
+You can see that you get an object that has a property "geonames" which is an array of objects, where each has a summary, a lat(itude), a lng(itude), a thumbnail image url (not all have one), a wikipedia link, etc.. Lots of stuff to use to show the results in an interesting way to the user.
+
+-Feel free to make it look however you want (nicer is better) but here are some ideas to get you started:
+
+    If item has a "thumbnail" image, use that for the marker instead of the default red marker.
+    When a marker is clicked on, show the summary data in an info window.
+    Include a link to the full Wikipedia article in the info window content.
+    Show list of all items in a "sidebar" on the left (like we did for the videos, title and img, maybe summary too)  
+    When item is clicked in sidebar pan/zoom the map to that item
+    Zoom map to show all results after search
+
+There are a few other flavors of the geonames wikipedia search API you can use instead of the fulltext search if you prefer - find nearby Wikipedia Entries (pass a lat lng instead of a search term) or Wikipedia Articles in Bounding Box (pass it a bounding box instead of a search term). Again see docs at https://www.geonames.org/export/wikipedia-webservice.html#wikipediaSearch for full details. In class we will use the fulltext search.
+
+-Important URLs:
+
+    google maps api -  https://developers.google.com/maps/gmp-get-started
+        see samples, guides and api reference at -  - https://developers.google.com/maps/documentation/javascript
+    get a geonames login - http://www.geonames.org/login
+    A sample geonames query - http://api.geonames.org/wikipediaSearch?q=yeshiva&maxRows=10&username=YOUR_USER_NAME_HERE&type=json
+    Some info about the geonames service - http://www.geonames.org/export/wikipedia-webservice.html#wikipediaSearch
+
+Try to get at least the basic idea working for next class (calling API, getting results, showing them on map and hopefully sidebar - we have done pretty much all this already in one example or another, it's just a matter of applying them all to this particular context). Once the basics are working, continue to spend time (even after we move on in class) transforming and polishing your app into something unique.
+
+There are many other interesting APIs you could use to add more capability to your map (google routes and places, geonames has searches that take bounding boxes so you could get info for a particular zoomed in area, etc..., google for other API's that offer geo spatial data...). You could spend a long time making real cool demos using google maps that can be very impressive to show when looking for work...
