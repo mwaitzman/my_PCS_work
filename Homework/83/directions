@@ -1,0 +1,34 @@
+For homework, please do the following:
+
+Create a map with drawing tools turned on (feel free to continue with map from last homework - or create a new one, whatever you prefer) and save all user drawings (markers, circles, lines, etc..), not just markers
+A few notes to help you do this:
+
+    In class we registered for overlaycomplete events and that's what gets called when any drawing is complete. We get passed an event that has an overlay which is the actual drawing (we used event.overlay.position.lat() and .lng() to get the marker position - more correctly we should probably have used overlay.getPosition().lat() etc.. ). You can continue to use this approach for all types of drawings - you can look at event.type to determine if its a marker, a circle, a polyline etc.. and then do the proper thing for each - but a better approach might be as suggested in the next item...
+    Instead of registering for a single overlaycomplete event you can instead register for different events for each type of drawing. So 'markercomplete', 'circlecomplete', 'rectanglecomplete', 'polylinecomplete', and 'polygoncomplete' within each of these instead of getting an event with .overlay in it, you get the drawing. So for markerComplete you get a marker and could do something like this
+
+    google.maps.event.addListener(drawingManager, 'markercomplete', marker => {
+        const markerLoc = marker.getPosition();
+        ...
+    });
+
+    for a circle you could do:
+    google.maps.event.addListener(drawingManager, 'circlecomplete', circle=> {
+         console.log(circle.getCenter(), circle.getRadius());
+        ...
+    });
+
+    This might be cleaner than a giant if else (or switch) in a single 'overlaycomplete' listener.
+
+
+    4. To store drawings of different types in local storage (and know what type to recreate when regenerating on reload), you will probably need either to store each type in a different array (e.g. localStorage.markers, localStorage.circles) or store "objects" that in addition to locations also store type so you know which type to reconstitute when reloaded - similar to the events that we get in 'overlaycomplete' when a marker is drawn that includes type.
+
+    5. Each type has different data you will need to store to be able to reconstitute it. Markers have position (getPosition()), circles have center and radius (getCenter(), getRadius()), rectangle has bounds (getBounds()), polyline and polygon have paths (getPath()) 
+    Note that while latlng objects like marker.position, circle.center, and even bounds like rectangle.bounds all seem to be writable to JSON using JSON.stringify() - and you don't need to do any work like pulling out the lat lng values yourself (which we did in class), the paths in polylines and polygons may not serialize the way you like. Instead you can use polyline.getPath().getArray() to get a simple array that CAN be written to json without any more work.
+
+See https://developers.google.com/maps/documentation/javascript/drawinglayer for basic drawing library help, 
+See some more details on the various shapes here - https://developers.google.com/maps/documentation/javascript/shapes
+and of course the reference for all google maps api objects - https://developers.google.com/maps/documentation/javascript/reference/
+
+There is much more we can do, support editing, colors, marker symbols etc.., zoom the map to a drawn rectangle, feel free to think of your own ideas and add them.
+
+One bug you may run into - once user starts drawing again, original drawings are lost, only new drawings are saved, This is easily fixed and we actually started hinting about a simple way to solve this (does declaration of markers variable have to use let or can it be const?) but forgot to come back to it...
