@@ -1,0 +1,7 @@
+For homework, as discussed, make a Mr Potato Head game.
+
+Have a potato head image somewhere on screen. User gets to drag and place body parts and accessories onto head as desired. Obviously you need to ensure that dragged pieces are above any pieces they are dragged on top of (as we did in the message box example a while back).  Write your own code to handle the dragging (using what we did in class as a basic guide for how to set up dragging) . If you like, after you get it working on your own, look into using a library like jQuery UI to provide the dragging capability instead. (BTW they support resizable as well - though as I recall using both at once while certainly possible can be tricky)
+
+Save the current state in local storage so that if you make a picture, close the browser, and reopen it, your picture is restored as it was when you closed the browser.
+
+Music playing in the background is a must. A nice background image(s) rather than a plain white background is a plus too. Ask your kids, brothers and sisters, nieces and nephews, etc for ideas to improve the game (resizable pieces, sound effects, animations, whatever). Game must be "developer tested, kid approved".
