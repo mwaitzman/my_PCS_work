@@ -1,0 +1,9 @@
+For homework:
+
+1. Write a constructor that creates a vehicle object. Allow callers to pass in a color which will then be set as that objects color. Vehicle prototype should also have a function "go" that takes a speed. When "go" is called, vehicle should set its speed and log out that it is "now going at speed X". It should also have a print method that logs a Vehicles color and current speed.
+
+2. Write a constructor that creates a Plane object. Plane's prototype should "extend" Vehicle, but plane should have its own "go" method that instead of logging "now going at speed X" should log "now FLYING at speed X".
+
+3. Create a vehicle and a plane, make them go, call their print functions. Verify that both go methods log the appropriate message for the type of object. Verify that print logs the current speed and color for both objects.
+
+Refer to Person and Employee example from class for a similar example. Also note that as discussed, the same result can be achieved without using constructors by manually setting objects prototype using Object.create (or setting obj.__proto__ or obj.prototype). Using constructors just perhaps makes initialization a little simpler. Examine the objects in the debugger, take a good look at the prototype chains in each to visually see how the prototype chain is set up.
