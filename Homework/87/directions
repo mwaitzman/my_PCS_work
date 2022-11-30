@@ -1,0 +1,6 @@
+For homework please do same exercise as last time, but this time using class syntax (if you misunderstood and already did it using class syntax, this time use constructor syntax, if you already did that as well, do it this time using neither, just use Object.create to assign prototypes)
+
+    Write a Vehicle class. Allow callers to pass in a color to the constructor which will then be set as that objects color. Vehicles should also have a function "go" that takes a speed. When "go" is called, vehicle should set its speed and log out that it is "now going at speed X". Vehicles should also have a print method that logs their color and current speed to the console.
+    Write a Plane class. Plane should extend Vehicle, but plane should have its own "go" method that instead of logging "now going at speed X" should log "now FLYING at speed X".
+    Create a vehicle and a plane, make them go, call their print functions. Verify that both go methods log the appropriate message for the type of object. Verify that print logs the current speed and color for both objects.
+    Compare objects created with these classes to those created from the Constructors you wrote last homework, notice that they are for all intents identical. The class syntax is simply a shortcut for setting up constructors and prototypes exactly as we did manually last time.
