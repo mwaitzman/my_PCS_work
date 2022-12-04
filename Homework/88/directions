@@ -1,0 +1,10 @@
+For homework please do the following:
+
+    Write a class (or just a constructor if you prefer that style) to create a Person object. Persons will have the following properties and all are settable via the constructor:
+        firstName,
+        lastName
+        age
+    Add validation to ensure that age is never not a number between 0-120. We did this in class using private data (either the new # syntax in a class or utilizing closures) and only allowing access via a getter/setter. (we didn't bother to do this in class but even when first constructed this validation should take place)
+    Add a "toString" method that returns a meaningful string representing the person (e,g first: Joe last: Biden age: 88).  Instead of hard coding all the properties to generate the return value (e.g return `${this.first} ${this.last} $(this.age}`, use a "for in" loop to iterate through the instance adding each property to the string. Skip any functions as we dont want those in the returned string.  (BTW if you then do string concatenation to an instance of a person, e.g. console.log('Hello ' + myPerson) your toString will be called instead of the one from Object prototype, and you'll see your string instead of [object Object])
+    Write another class (or just a constructor if you prefer that style) to create a Student object. Students will "inherit" everything from Persons and will just add the additional property "grade".
+    Something to think about. See what happens if you call toString on a student.  Does it matter if you add a check for hasOwnProperty in the "for in" loop? (Hint no. Why not? Isn't hasOwnProperty supposed to filter out things from prototype? Why in this case are we still seeing first and last?)
