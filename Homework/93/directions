@@ -1,0 +1,10 @@
+For homework, work on packaging up your snake game (or the version from class if you prefer) using webpack. Do as much as you are able to do. Some things you can do that we did in class:
+
+    Use webpack to bundle the js.
+    Use webpack to bundle and import css
+    Use webpack to import images in js (or in css, we didnt show in class but an img used in css e.g for background-image will also work with the "asset" rule. For img directly in html file we need another plugin/loader though, that won't work yet)
+    Use import/export to import the different classes (snake, apple, main game file or class if you have one) from different files instead of having them all in 1 big file (if you have it that way currently). You may have to now pass some things into constructors or setters to make them available to other objects where they used be in the same scope (e.g context, apple, snake which are used by other objects)
+
+There are still a few important things we still have to see next class that will make the webpack development experience even better.
+
+Please don't forget to update your .gitignore to ignore node_modules and dist folders. We don't want those in git, we can just run npm i to get node_modules, and then run webpack to get the dist folder. Those things don't usually belong in the repo (and take up tons of extra room on my disk)
