@@ -1,0 +1,4 @@
+For homework, redo the orders quiz as a react app (but hard code the order to show as we haven't done user interactions yet so no way for the user to pick one).
+No need to get fancy with the UI, just a basic display of order, customer, items, total as we did in that example.
+This will actually be a nice example for you to compare and contrast to see if you find the React version an improvement over what you wrote without its help. I hope you are convinced it's an improvement.
+(Note: I have not actually coded this example and usually I like to do all homeworks before assigning them to make sure there are no gotchas that we haven't covered, but I don't think there should be any. If you do run into a road block please ask).
