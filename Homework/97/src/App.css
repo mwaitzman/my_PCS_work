@@ -1,0 +1,7 @@
+@font-face {
+	font-family: "Libertinus Mono";
+	src: local('fonts/LibertinusMono-Regular.woff2') format('woff2'); 
+  }
+html {
+	font-family: "Libertinus Mono";
+}
