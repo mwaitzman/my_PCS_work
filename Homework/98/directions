@@ -1,0 +1,27 @@
+For homework, update your recipe app (or the one from class) so that there is a separate Recipe List component that shows the list of available recipes.
+Since the "selectedRecipe" state is in the parent component, we were previously forced to have the recipe list be created in the same component so that it could update the "selectedRecipe" state. We had not yet seen how to have a child component accept state from its parent as a prop - and also be passed a function it should call to have the parent update the state. Now that we have seen how to do this, we can make a separate RecipeList component and it will be able to set the parent state (causing a rerender with new selected recipe)
+
+As this is a shorter homework, you hopefully will have time to start on bigger projects - that will keep us busy as background homework (there will often be minimal other homework) for a few weeks.
+
+The idea is to build a simple blog site - we will first write a non React version, then we will rebuild using React to compare and contrast. 
+
+Site will be populated with data from https://jsonplaceholder.typicode.com/. This is a site that provides fake data suitable to use for testing. Several types of data feeds are provided, we will be using only three. Users, posts, and comments.
+Users - https://jsonplaceholder.typicode.com/users
+Posts - e.g. https://jsonplaceholder.typicode.com/posts?userId=2 (query parameter userId=2 gets posts only for user 2)
+Comments- e.g. https://jsonplaceholder.typicode.com/comments?postId=5 (query parameter postId=5 gets us comments only for post 5)
+
+When navigating to the site, visitor will be shown a list of all available blogs/users. For each blog/user show users name, website, and company info.
+
+Allow visitor to select a particular blog and then show the posts for that blog.  
+
+When displaying each post, include a “show comments” button that will fetch the comments for that post. Once the comments are showing, button should change to “hide comments”, and hide the comments when clicked.
+
+There should always be a link displayed which will return the user back to the start page showing the list of available blogs when clicked. (In the React version we will do this using the Router which we haven't seen yet - but soon will)
+
+E.C. When viewing a blog, show only 3 posts at a time. Have a prev and next button that cycles through the posts (as you might do if the API supported only fetching a few at a time so as not to fetch a tremendous amount of data at once- this particular demo API doesn't, so limiting the number user can see is kind of not so useful..)
+
+As a final review (course is almost over....),  before beginning a React version, first complete a non React version. (For the non React version I recommend you use Webpack (I actually recommend you do this for all your non trivial JavaScript work going forward) but if for some reason you are unable to use webpack then don't).
+
+We won't get to actually doing this in class for several more classes (we need to see a few more topics in React first) - and even then we will do the non React version first -  so you can take some time to complete a non React version first, then move on to a React version. it doesn't need to be fully completed for some time. I will give a heads up as we get nearer to actually beginning it in class.
+  
+Done well, this is a good representative project that really shows your ability to develop web apps using JavaScript.
