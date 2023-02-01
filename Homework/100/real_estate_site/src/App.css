@@ -1,0 +1,29 @@
+html {
+	background-color: #000;
+	color: #C3EC36;
+}
+a {
+	color: #60C98F
+}
+a:visited {
+	color: #CF4030
+}
+
+ul li {
+	display: inline;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-right-style: solid;
+}
+ul li:first-child {
+	padding-left: 0;
+}
+ul li:last-child {
+	padding-right: 0;
+	border-right-style: none;
+}
+
+#navbar {
+	position: absolute;
+	bottom: 0;
+}
