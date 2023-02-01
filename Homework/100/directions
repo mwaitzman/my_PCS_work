@@ -1,0 +1,8 @@
+For homework please continue to work on the previous hw - to create a simple blog site (first non React version then React version) - as discussed we will be covering this in class next week.
+
+In addition, use react router to help create a skeleton real estate site where there are different routes to take you to the following pages
+home page, buy a home, sell a home. 
+There should be links on all pages to get to all other pages.
+All pages should share a common look and feel (but no need for fancy css)
+
+
