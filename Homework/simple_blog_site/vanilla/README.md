@@ -1,0 +1,1 @@
+This is (intentionally) very bad code. Get the eyebleach before viewing. You've been warned.
