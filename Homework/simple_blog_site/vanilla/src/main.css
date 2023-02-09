@@ -1,0 +1,30 @@
+.user__company {
+	font-size: xx-small;
+}
+#users_list {
+	list-style-type: none;
+	background-color: #35303455;
+	padding-left: 0;
+}
+#users_list>li {
+	border-style: groove;
+	border-collapse: collapse;
+	border-width: 1px;
+	opacity: 80%;
+}
+
+.post {
+	background-color: #210315;
+	border-style: ridge;
+	border-radius: 5%;
+	list-style-type: none;
+}
+
+.post button {
+	margin-bottom: 5px;
+	margin-left: 5px;
+	background-color: #353639;
+}
+#posts_nav>* {
+	display: inline-block;
+}
