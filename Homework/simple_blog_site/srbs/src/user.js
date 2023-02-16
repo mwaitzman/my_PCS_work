@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import Company from "./company";
 
 
-export default function User(props) {
-	const {user, idx} = props;
+export default function({user, idx, viewPostsOf}) {
 	const [viewingCompany, setViewingCompany] = useState(false);
+	const showPosts = () => {
+		viewPostsOf(user.id);
+	};
 	function toggleCompanyInfo() {
 		setViewingCompany(!viewingCompany);
 	  }
@@ -13,7 +15,10 @@ export default function User(props) {
 			id={`user_${idx}`}
 			className="user"
 		>
-			<h4 className="user__name">{user.name}</h4>
+			<h4
+			className="user__name"
+			onClick={showPosts}
+			>{user.name}</h4>
 			<a
 			className="user__website"
 			href={

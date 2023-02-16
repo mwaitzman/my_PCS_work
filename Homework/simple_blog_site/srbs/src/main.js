@@ -1,72 +1,47 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
-import User from "./user"
+import Posts from "./posts";
+import User from "./user";
 
 
-export default async function main() {
+export default async function() {
 	let dpy = document.getElementById('dpy');
 	let users = await fetch(`https://jsonplaceholder.typicode.com/users/`)
 		.then(resp => resp.json())
 	;
+
+	let posts = null;
+	const viewPostsOf = userId => {
+		posts = <Posts userId={userId}/>;
+		console.table(posts);
+	}
+
+	let comments = null;
+	const viewCommentsOn = postId => {
+		comments = (<Comments postId={postId}/>);
+		console.table(comments);
+	}
+
 	const root = ReactDOM.createRoot(document.getElementById("dpy"));
 	root.render(
 		<>
-			<ul id="users_list">
+		{
+			comments
+			? comments
+			:
+			posts
+			? posts
+			: (
+				<ul id="users_list">
 				{users.map(
-					(user, idx) => <User user={user} idx={idx} key={user.id}/>
+					(u, idx) => <User user={u} idx={idx} key={u.id} viewPostsOf={viewPostsOf}/>
 				)}
 			</ul>
-			<a style={{textDecoration: "underline", color: "#60C98F"}} href="/">Back to users list</a>
+			)
+		}
+		<a style={{textDecoration: "underline", color: "#60C98F"}} href="/">Back to users list</a>
 		</>
 	);
-//A		// let inner_html = `<ul id="users_list">${users.reduce(
-		// 	(buf, user, idx) => {
-		// 		return buf + `<li id="user_${idx}" class="user"><h4 class="user__name">${user.name}</h4><a
-		// 		class="user__website"
-		// 		href="${
-		// 		(
-		// 			user.website.startsWith("https://")
-		// 			|| user.website.startsWith("http://")
-		// 		)
-		// 			? user.website
-		// 			//TODO: if `user.website` only supports HTTP, and not HTTPS, display the HTTP link? Or do browsers automatically redirect in that case or what? What about other protocols (e.g. Gemini)? Should it just have a list of protocols in preferred order and try navigating to each and based on the response status code, display the highest one that's successful (probably defaulting to HTTP if none work (so assuming the server's down for maintenance or w/e))? Periodic refresh if none work (or even if they do (at least for HTTPS not working but HTTP working?)?)?
-		// 			: "https://" + user.website
-		// 	}">${user.website}</a><div
-		// 	"class="user__company"
-		// 	id="user__company__${idx}"
-		// 	>view company info</div></li>`
-		// 		// + "</ul>";
-		// 	},
-		// 	""
-		// )}</ul>`;
-//z		// dpy.innerHTML = inner_html;
-		// for (let idx = 0; idx < users.length; idx++) {
-		// 		//// clicking on company => show company info in popup box
-		// 		document
-		// 		.getElementById(`user__company__${idx}`)
-		// 		.addEventListener("click", () => {
-		// 			overlay_company_info(users[idx].company);
-		// 		});
-		// 		//// clicking on user => load users posts
-		// 		document
-		// 		.getElementById(`user_${idx}`)
-		// 		.addEventListener("click", e => {
-		// 			if (e.target.id !== `user__company__${idx}`) {
-		// 				fetch(`https://jsonplaceholder.typicode.com/posts?userId=${idx}`)
-		// 				.then(resp => resp.json())
-		// 				.then(posts => {
-		// 					//// think this freeze is incorrect but who really cares here. The reload is hacky too but w/e
-		// 					const back_to_blogs = Object.freeze("<div style=\"text-decoration: underline; color: #60C98F\" onclick=\"window.location.reload();\">Back to users list</div>");
-		// 					console.table(posts, ["id"]);
-		// 					if (posts.length === 0) {
-		// 						dpy.innerHTML = `<div>${users[idx].name} hasn't posted yet</div>${back_to_blogs}`
-		// 					} else {
-		// 						dpy.innerHTML = show_3_posts(posts, 0) + back_to_blogs;
-		// 					}
-		// 				});
-		// 			}
-		// 		});
-		// 	};
 }
 
 
