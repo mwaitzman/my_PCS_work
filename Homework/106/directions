@@ -1,0 +1,4 @@
+For homework, write some Typescript.
+Make some strongly typed functions, call them with strongly typed variables.
+Write an interface. Make some function accept a param of only that type.
+Write a class - but don't use this.x in the constructor to assign the member properties. Instead use the public/private keywords that typescript adds that does this for you.
