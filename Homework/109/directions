@@ -1,0 +1,13 @@
+Create a connect app that serves up several different pages (i.e create some routes that are mounted at different endpoints e.g. /about, /home, etc..)
+
+Add an authorization middleware that will only allow these pages to be served if caller passed the following query parameter along with the request - magicWord=please
+
+In other words, if a request comes in for the page
+/about
+You should send a nasty refusal, but if request comes in for
+/about?magicWord=please
+then you should send the page.
+
+Do this as middleware - where this authorization middleware is invoked higher in the chain the pages being served so that it can decide whether to allow the request to continue (perhaps by calling next) or cause it to fail (perhaps by calling next with an error), rather than writing this logic inside of each route. (You can do it that way first, then turn it into separate middleware if that makes it simpler for you.)
+
+For bonus points write this piece of middleware in a separate file. Also see how easy it is to have some routes be unprotected (by having them earlier in the middleware chain then the authorization middleware) and some protected (by having them later in the chain then the authorization middleware).
