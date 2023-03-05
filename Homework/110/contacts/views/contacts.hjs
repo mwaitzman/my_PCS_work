@@ -1,0 +1,35 @@
+<a href="/contacts/addContact">add contact</a>
+
+<table id="contactsTable">
+  <thead>
+    <tr>
+      <td>first</td>
+      <td>last</td>
+      <td>email</td>
+      <td>phone</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#contacts}}
+    <tr>
+      <td>{{first}}</td>
+      <td>{{last}}</td>
+      <td>{{email}}</td>
+      <td>{{phone}}</td>
+		<td>
+        <a href="contacts/editContact/{{id}}">edit</a>
+      </td>
+      <td>
+        <a href="contacts/deleteContact/{{id}}">delete</a>
+      </td>
+    </tr>
+    {{/contacts}}
+
+    {{#noContacts}}
+    <tr>
+      <td colspan="5">no contacts loaded</td>
+    </tr>
+    {{/noContacts}}
+  </tbody>
+</table>
