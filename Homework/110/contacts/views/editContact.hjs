@@ -1,0 +1,23 @@
+<form method="POST">
+  <div class="formgroup">
+    <label for="first">first:</label>
+    <input name="first" value="{{selected_contact.first}}" required>
+  </div>
+  <div class="formgroup">
+    <label for="last">last:</label>
+    <input name="last" value="{{selected_contact.last}}" required>
+  </div>
+  <div class="formgroup">
+    <label for="email">email:</label>
+    <input name="email" type="email" value="{{selected_contact.email}}">
+  </div>
+  <div class="formgroup">
+    <label for="phone">phone:</label>
+    <input name="phone" value="{{selected_contact.phone}}">
+  </div>
+  <div class="buttons">
+    <button>submit changes</button>
+    <button type="reset">reset to prior</button>
+    <a href="/contacts">cancel</button>
+  </div>
+</form>
