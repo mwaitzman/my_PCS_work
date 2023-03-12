@@ -1,0 +1,14 @@
+For homework please do the following:
+
+    Build a rest API using Node, Express, and mySQL such as could be used to support the recipes app we wrote a while back.
+    API should support CRUD (POST, GET, PUT, DELETE), so basically we need endpoints to do the following:
+        Get all recipes (maybe just a subset of the recipe data like name and category)
+        Get a single recipe
+        Add a recipe
+        Update a recipe
+        Delete a recipe
+    Data should be returned as JSON and all responses should include appropriate status codes.
+    Test your API using POSTMAN to send requests and inspect resulting status codes and messages.
+    If you have time, actually hook up one of the UIs we wrote to hit this API instead of using hard coded JSON files as we did it originally.
+
+We likely won't be doing this exercise in class - but it's pretty much the same as the contacts api - just using recipes instead of contacts. (Do write it from scratch not just repurpose the contacts one so that you get an actual review of the many important concepts exercised by this example)
