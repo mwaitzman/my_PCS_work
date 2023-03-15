@@ -1,0 +1,5 @@
+For homework please do the following:
+
+    Write an express app that uses a cookie to keep track of how many times a user has visited a site.
+    Add a page that asks the user to enter their name and store that in a cookie as well. Display somewhere on a page to prove it's working.
+    E.C Do one or both of the above using a session instead of a cookie.
