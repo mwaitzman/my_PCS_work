@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8"/>
+    <title>Register your name</title>
+  </head>
+  <body>
+    <h1>Register your name</h1>
+    <form method="post">
+		<input type="text" name="name" placeholder="full name"/>
+		<button>submit</button>
+	</form>
+  </body>
+</html>
