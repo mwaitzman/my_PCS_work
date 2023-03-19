@@ -1,0 +1,10 @@
+We didn't get very far in class with our web socket / socket.io chat example, we got the basic connections set up, but thats all we did.
+For homework please start to implement it. See  how far you can get. The basic idea is as follows:
+
+    Add a UI to the client HTML page.. We need an area to see the chat messages, an input for the user to type in messages, and a "send" button to send the message (could be a form but doesn't have to be).
+    Write code on the client side so that when the user presses the send button, whatever the user has entered in the input gets sent to the server over the socket (just as we sent the "Hello from the client" message).
+    On the server, register for the events on the socket (just as we did on line 18 - socket.on(eventName, ...)) and when a message is received from any client, send it out to all clients. There are 2 ways to do this:
+        socketIo.emit(eventName, message) - where socketIo is the socketIo server - in our example from class created in index.js on line 9) - so for example  socketIo.emit('msg', 'This is a message'). 
+        socket.broadcast.emit(eventName, message) - where socket is an individual socket that we got a connection to - in our example from class the socket received in index.js on line 13 - so for example socket.broadcast.emit ('msg', 'This is a message'). 
+    The difference between these 2 is that the first sends the message to all clients, the second sends to all EXCEPT for the socket doing the broadcast. So for this chat depending on how it's implemented you may want to do either of these 2. If you want the sender to get its own messages back, do it the first way, if you don't want the sender to get its own messages back, do it the second way.
+    On the client side, register to receive these events sent from the server (just as we didon line 6 - socketIo.on(eventName, ...))  and when you get one, populate the UI with the received messages. For messages sent by this client you can choose to add them when sent, or if you chose choice #1 above, when you get your own message back the same as you get everyone else's.
