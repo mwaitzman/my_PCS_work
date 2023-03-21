@@ -13,8 +13,9 @@
 	opacity: 80%;
 }
 
+/* SL - I cant see anything... */
 .post {
-	background-color: #210315;
+	/*background-color: #210315;*/
 	border-style: ridge;
 	border-radius: 5%;
 	list-style-type: none;
@@ -23,7 +24,7 @@
 .post button {
 	margin-bottom: 5px;
 	margin-left: 5px;
-	background-color: #353639;
+	/*background-color: #353639;*/
 }
 #posts_nav>* {
 	display: inline-block;

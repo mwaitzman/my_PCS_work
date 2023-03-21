@@ -1,1 +1,3 @@
 This is (intentionally) very bad code. Get the eyebleach before viewing. You've been warned.
+
+// SL - Why would you write intentionally bad code to submit as part of your grade? Im not following...
