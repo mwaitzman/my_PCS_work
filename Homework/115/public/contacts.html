@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/contacts.css" />
+  </head>
+
+  <body>
+    <button id="add">add contact</button>
+
+    <table id="contactsTable">
+      <thead>
+        <tr>
+          <td>first</td>
+          <td>last</td>
+          <td>email</td>
+          <td>phone</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5">no contacts loaded</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form id="newContactForm">
+      <div class="formgroup">
+        <label for="first">first:</label>
+        <input id="first" required xminlength="1" xmaxlength="128">
+      </div>
+      <div class="formgroup">
+        <label for="last">last:</label>
+        <input id="last" required xminlength="1" xmaxlength="128">
+      </div>
+      <div class="formgroup">
+        <label for="email">email:</label>
+        <input id="email" type="email">
+      </div>
+      <div class="formgroup">
+        <label for="phone">phone:</label>
+        <input id="phone" required>
+      </div>
+      <div class="buttons">
+        <button>save</button>
+        <button type="reset">reset</button>
+        <button type="button" id="cancel">cancel</button>
+      </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	  <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/messageBox.js"></script>
+    <script src="/javascripts/contacts.js"></script>
+  </body>
+
+</html>
