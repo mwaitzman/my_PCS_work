@@ -1,0 +1,34 @@
+For homework please do the following:
+
+Add authentication - basically exactly what we did in class 113 "use sessions" example only storing the data in mongo instead of mySQL.
+Following are the major steps I think you'll need to take to make this happen. Please do server side and if time allows work on client side as well.
+
+    On server (express)
+        Bring the authorization code endpoints - login, logout, and register (and session) into the blog server (posts only, we don't care about the gets, we won't be serving HTML forms from our API server, that will be done in client)
+        Translate the mysql selects and inserts into mongo. Well store the users in a new users collection in our blog db alongside our posts collection. Make sure we are returning appropriate status codes for success and failure.
+        Test the 3 authentication endpoints using Postman.
+        Add middleware protecting the add post route so only someone who successfully logged in (has a user in session) can get to it (return 401 - unauthorized if not logged in, call next() if are logged in)
+        Fix add post to use correct user (from session) as author instead of current hard coded one
+        CORS by default doesn't allow cookies so our session wont work. To allow cookies we need to "allow credentials" both server side and client side. Server side we can do this by passing "credentials: true" to the express cors middleware. something like
+
+        app.use(require('cors')({
+
+            origin: 'http://localhost:3000',
+
+            credentials: true
+
+        }));
+
+        (see https://stackoverflow.com/questions/24687313/what-exactly-does-the-access-control-allow-credentials-header-do#:~:text=In%20order%20to%20reduce%20the,to%20include%20cookies%20on%20requests.&text=Responding%20with%20this%20header%20to,included%20on%20cross%2Dorigin%20requests.)
+
+    On client (react)
+        Add login/register/logout UI to app. Simplest might be a component at top always showing, that shows either a login/register UI or current user and a logout button as appropriate for current logged in state. Entering user name and password and clicking login/register will do a post to the appropriate endpoint. If successful, we are logged in, set state and show logged in name and logout button (or do nothing if it was a register - maybe show a success message). If it fails, bad username/password. Show error. Once we are showing logged in name and logged out button, clicking it calls logout endpoint and sets state to not logged in
+        To enable cookies to work with CORS we need to allow credentials client side too. Client side we can do this by finding all calls to fetch and adding the option "credentials": true. So something like:
+
+        fetch(`http://localhost:8080/posts`, {
+
+                method: 'POST',
+
+                credentials: 'include',
+
+                ...
