@@ -1,0 +1,11 @@
+For homework, add comments to our blog app. Being mongo, we will do this as a comments array on each post. Recall from our mongosh experiments that to add something to an array you can use  the $push operator. So the implementation of adding a comment to a posts array in mongo might be something like this (find the post with desired id, push new comment onto comments array):
+const result = await posts.updateOne({ _id: Mongo.ObjectId(thePostIdToAddCommentTo) }, { $push: { comments: theNewComment } });
+
+- Add an endpoint to our api to add a comment (probably mounted on 'posts/:id/comments' so that you get the post id as a route param), find the desired post, and add the posted comment to it in mongo (get logged in user as author and current time as date just as we do on add post).
+Send back a 201 status code on success. 
+If post with given id is not found (result.modifiedCount = 0) then that's probably a 404 error code. 
+Any other unknown error can just be a 500 error code (our error middleware will handle this)
+
+- Have socket io send the new comment to all clients so they can add it to the page.
+
+- Test using postman. If you have time, add comments to the UI, add the ability to add a comment (probably best inline in the comments display under the post, not a separate page), add the socket io code to listen for new comments and update the posts state as needed for the page to rerender showing the new comment.
