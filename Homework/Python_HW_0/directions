@@ -1,0 +1,14 @@
+For homework:
+
+        Install python :)
+        Create a list containing a few fruit names and print it out.
+        Print out from the third character through the third to last character (inclusive) in the name of the second to last fruit in the fruits list (make sure you use a fruit name that's big enough to get something....)
+        Write a Python script to print out the times tables from 1 to 10. (1,2,3, etc... 2,4,6, etc... 3,6,9, etc...)
+        Write a guess the number game. Computer picks a number and asks the user to guess it. User keeps trying until they get it right.
+
+        You can hard code the picked number - or import the random module (like we imported the math module) and use random.randint to get a random number, e.g., 
+        random.randint(1, 101) # pick a number between 1 and 100
+
+        Make sure to gracefully handle bad input from the user (non numeric characters) and not crash.
+
+        Extra credit to tell the user if they guessed too low or too high.
